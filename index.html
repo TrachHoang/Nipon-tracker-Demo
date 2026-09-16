@@ -138,12 +138,33 @@
   <main class="max-w-[1550px] mx-auto px-5 py-5">
     <!-- TAB 1: BÁO CÁO TỔNG HỢP & SALES -->
     <div id="tab-dashboard" class="tab-content block">
+      <!-- BỘ LỌC KHOẢNG THỜI GIAN BÁO CÁO -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-5 flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <h2 class="text-base font-bold text-slate-900">Bộ Lọc Thời Gian Báo Cáo</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Tùy chỉnh khoảng thời gian để thống kê số liệu và biểu đồ</p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 text-xs">
+          <div class="flex items-center gap-1.5">
+            <span class="font-medium text-slate-600">Từ ngày:</span>
+            <input type="date" id="filterStartDate" onchange="renderDashboardSummary()" class="border border-slate-300 rounded-lg px-3 py-1.5 bg-white text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500">
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-medium text-slate-600">Đến ngày:</span>
+            <input type="date" id="filterEndDate" onchange="renderDashboardSummary()" class="border border-slate-300 rounded-lg px-3 py-1.5 bg-white text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500">
+          </div>
+          <button onclick="resetDashboardDateFilter()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-3 py-1.5 rounded-lg transition">
+            <i class="fa-solid fa-rotate-right mr-1"></i> <span id="btnDefaultYearLabel">Năm hiện tại</span>
+          </button>
+        </div>
+      </div>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
         <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
           <div>
-            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">TỔNG THIẾT BỊ (SỐ SN)</p>
+            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">TỔNG THIẾT BỊ</p>
             <h3 id="statTotalDevices" class="text-3xl font-extrabold text-slate-900 mt-1">0</h3>
-            <p class="text-xs text-blue-600 font-medium mt-1"><span id="statUniqueSN">0</span> máy (SN duy nhất)</p>
+            <p class="text-xs text-blue-600 font-medium mt-1"><span id="statUniqueSN">0</span> máy</p>
           </div>
           <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 text-xl">
             <i class="fa-solid fa-boxes-stacked"></i>
@@ -152,7 +173,7 @@
 
         <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between">
           <div>
-            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">ĐANG DEMO TẠI BV (SN DUY NHẤT)</p>
+            <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">ĐANG DEMO TẠI BV</p>
             <h3 id="statActiveDemos" class="text-3xl font-extrabold text-amber-600 mt-1">0</h3>
             <p class="text-xs text-amber-600/90 font-medium mt-1">Số máy thực tế tại viện</p>
           </div>
@@ -225,18 +246,29 @@
       </div>
     </div>
 
-    <!-- TAB 2: NHẬT KÝ DEMO & LẦN THĂM (CÓ PHÂN TRANG) -->
+    <!-- TAB 2: NHẬT KÝ DEMO & LẦN THĂM (CÓ PHÂN TRANG & BỘ LỌC KHOẢNG THỜI GIAN) -->
     <div id="tab-logs" class="tab-content hidden">
       <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-4 flex flex-wrap justify-between items-center gap-4">
         <div>
           <h2 class="text-base font-bold text-slate-900">Nhật Ký Chi Tiết Lần Thăm & Đánh Giá Demo</h2>
           <p class="text-xs text-slate-500 mt-0.5">Ghi nhận tiến độ, cập nhật nhận xét đánh giá của Bác sĩ sau mỗi lần thăm</p>
         </div>
-        <div class="flex items-center gap-3">
-          <select id="filterSale" onchange="currentPageLogs=1; renderLogsTable();" class="text-xs border border-slate-300 rounded-lg px-3 py-2 bg-white text-slate-700">
+        <div class="flex flex-wrap items-center gap-3 text-xs">
+          <div class="flex items-center gap-1.5">
+            <span class="font-medium text-slate-600">Từ ngày:</span>
+            <input type="date" id="filterLogsStartDate" onchange="currentPageLogs=1; renderLogsTable();" class="border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500">
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="font-medium text-slate-600">Đến ngày:</span>
+            <input type="date" id="filterLogsEndDate" onchange="currentPageLogs=1; renderLogsTable();" class="border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white text-slate-800 focus:outline-none focus:ring-1 focus:ring-blue-500">
+          </div>
+          <button onclick="resetLogsDateFilter()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-3 py-1.5 rounded-lg transition">
+            <i class="fa-solid fa-rotate-right mr-1"></i> <span id="btnLogsDefaultYearLabel">Năm hiện tại</span>
+          </button>
+          <select id="filterSale" onchange="currentPageLogs=1; renderLogsTable();" class="text-xs border border-slate-300 rounded-lg px-3 py-1.5 bg-white text-slate-700">
             <option value="">Tất cả Sale</option>
           </select>
-          <select id="filterStatus" onchange="currentPageLogs=1; renderLogsTable();" class="text-xs border border-slate-300 rounded-lg px-3 py-2 bg-white text-slate-700">
+          <select id="filterStatus" onchange="currentPageLogs=1; renderLogsTable();" class="text-xs border border-slate-300 rounded-lg px-3 py-1.5 bg-white text-slate-700">
             <option value="">Tất cả trạng thái</option>
             <option value="Đang demo">Đang demo</option>
             <option value="Đã thu hồi">Đã thu hồi</option>
@@ -368,7 +400,7 @@
                 <th class="py-3 px-4">TÊN BỆNH VIỆN / KHÁCH HÀNG</th>
                 <th class="py-3 px-4">TỈNH / THÀNH PHỐ</th>
                 <th class="py-3 px-4">KHOA PHÒNG THƯỜNG DEMO</th>
-                <th class="py-3 px-4 text-center">MÁY Đang DEMO</th>
+                <th class="py-3 px-4 text-center">MÁY ĐANG DEMO</th>
                 <th class="py-3 px-4 text-center">HÀNH ĐỘNG</th>
               </tr>
             </thead>
@@ -1207,7 +1239,8 @@
         if (!isNaN(num) && num > maxNum) maxNum = num;
       });
       const nextNum = maxNum + 1;
-      document.getElementById('logCode').value = 'DM-2026-' + String(nextNum).padStart(3, '0');
+      const currentYear = new Date().getFullYear();
+      document.getElementById('logCode').value = `DM-${currentYear}-` + String(nextNum).padStart(3, '0');
       document.getElementById('modalLogTitle').innerText = 'Tạo Phiếu Demo / Lần Thăm Mới';
 
       populateModalDropdowns();
@@ -1315,8 +1348,30 @@
       }
     }
 
+    function resetDashboardDateFilter() {
+      const currentYear = new Date().getFullYear();
+      document.getElementById('filterStartDate').value = `${currentYear}-01-01`;
+      document.getElementById('filterEndDate').value = `${currentYear}-12-31`;
+      
+      const label = document.getElementById('btnDefaultYearLabel');
+      if (label) label.innerText = `Năm ${currentYear}`;
+      
+      renderDashboardSummary();
+    }
+
+    function resetLogsDateFilter() {
+      const currentYear = new Date().getFullYear();
+      document.getElementById('filterLogsStartDate').value = `${currentYear}-01-01`;
+      document.getElementById('filterLogsEndDate').value = `${currentYear}-12-31`;
+      
+      const label = document.getElementById('btnLogsDefaultYearLabel');
+      if (label) label.innerText = `Năm ${currentYear}`;
+      
+      currentPageLogs = 1;
+      renderLogsTable();
+    }
+
     function renderDashboardSummary() {
-      const currentYear = 2026;
       const totalDevicesCount = devices.length;
 
       const activeSNSet = new Set();
@@ -1325,6 +1380,11 @@
       });
       const activeDemosCount = activeSNSet.size;
       const availableDevicesCount = Math.max(0, totalDevicesCount - activeDemosCount);
+
+      const startDateVal = document.getElementById('filterStartDate')?.value;
+      const endDateVal = document.getElementById('filterEndDate')?.value;
+      const startFilterTime = startDateVal ? new Date(startDateVal).getTime() : null;
+      const endFilterTime = endDateVal ? new Date(endDateVal).getTime() : null;
 
       const salesMap = {};
       sales.forEach(s => {
@@ -1340,6 +1400,12 @@
       const uniqueSessions = {};
 
       logs.forEach(l => {
+        if (!l.startDate) return;
+        const logTime = new Date(l.startDate).getTime();
+
+        if (startFilterTime && logTime < startFilterTime) return;
+        if (endFilterTime && logTime > endFilterTime) return;
+
         const sName = l.sale || '#';
         if (!salesMap[sName]) {
           salesMap[sName] = { 
@@ -1350,9 +1416,6 @@
             totalDays: 0 
           };
         }
-
-        const logYear = l.startDate ? new Date(l.startDate).getFullYear() : currentYear;
-        if (logYear !== currentYear) return;
 
         const cleanHosp = (l.hospital || '').replace(/\s*\(\s*\)/g, '').trim().toLowerCase();
         const cleanDept = (l.department || '-').trim().toLowerCase();
@@ -1529,7 +1592,7 @@
       return { html, totalPages };
     }
 
-    // 1. RENDER NHẬT KÝ (LOGS)
+    // 1. RENDER NHẬT KÝ (LOGS) CÓ KÈM BỘ LỌC KHOẢNG THỜI GIAN
     function changePageLogs(p) {
       currentPageLogs = p;
       renderLogsTable();
@@ -1541,6 +1604,11 @@
       const filterSaleEl = document.getElementById('filterSale');
       let filterSale = filterSaleEl ? filterSaleEl.value : '';
       const filterStatus = document.getElementById('filterStatus')?.value || '';
+
+      const logsStartVal = document.getElementById('filterLogsStartDate')?.value;
+      const logsEndVal = document.getElementById('filterLogsEndDate')?.value;
+      const logsStartTime = logsStartVal ? new Date(logsStartVal).getTime() : null;
+      const logsEndTime = logsEndVal ? new Date(logsEndVal).getTime() : null;
 
       const userRole = currentUser && currentUser.role ? currentUser.role.toLowerCase().trim() : '';
       const isPureSale = userRole === 'sale';
@@ -1557,6 +1625,11 @@
 
       tbody.innerHTML = '';
       const filtered = logs.filter(l => {
+        if (l.startDate) {
+          const lTime = new Date(l.startDate).getTime();
+          if (logsStartTime && lTime < logsStartTime) return false;
+          if (logsEndTime && lTime > logsEndTime) return false;
+        }
         return (!filterSale || l.sale === filterSale) && (!filterStatus || l.status === filterStatus);
       });
 
@@ -1570,7 +1643,7 @@
       const pageData = filtered.slice(startIndex, endIndex);
 
       if (pageData.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="11" class="py-8 text-center text-slate-400 italic font-medium">Không có dữ liệu nhật ký demo</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="11" class="py-8 text-center text-slate-400 italic font-medium">Không có dữ liệu nhật ký demo trong khoảng thời gian này</td></tr>`;
       } else {
         pageData.forEach((l) => {
           const dev = devices.find(d => String(d.sn).trim() === String(l.sn).trim()) || { name: 'Thiết bị', sn: l.sn };
@@ -2259,6 +2332,24 @@
     }
 
     window.addEventListener('DOMContentLoaded', async () => {
+      const currentYear = new Date().getFullYear();
+      
+      const startDateInput = document.getElementById('filterStartDate');
+      const endDateInput = document.getElementById('filterEndDate');
+      if (startDateInput && !startDateInput.value) startDateInput.value = `${currentYear}-01-01`;
+      if (endDateInput && !endDateInput.value) endDateInput.value = `${currentYear}-12-31`;
+
+      const logsStartInput = document.getElementById('filterLogsStartDate');
+      const logsEndInput = document.getElementById('filterLogsEndDate');
+      if (logsStartInput && !logsStartInput.value) logsStartInput.value = `${currentYear}-01-01`;
+      if (logsEndInput && !logsEndInput.value) logsEndInput.value = `${currentYear}-12-31`;
+      
+      const label = document.getElementById('btnDefaultYearLabel');
+      if (label) label.innerText = `Năm ${currentYear}`;
+
+      const logsLabel = document.getElementById('btnLogsDefaultYearLabel');
+      if (logsLabel) logsLabel.innerText = `Năm ${currentYear}`;
+
       const savedUser = localStorage.getItem('nipon_meddemo_user');
       if (savedUser) {
         currentUser = JSON.parse(savedUser);
