@@ -580,3 +580,1836 @@
         </h3>
         <button onclick="closeModalDevice()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
       </div>
+      <form id="formDevice" onsubmit="saveDevice(event)" class="p-5 space-y-3.5 text-xs">
+        <input type="hidden" id="deviceEditSn">
+        
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1 text-[11px]">Nhóm Thiết Bị</label>
+          <input type="text" id="deviceGroupInput" list="groupSuggestions" required placeholder="Chọn hoặc nhập nhóm..." class="w-full border border-slate-300 rounded-lg p-2 focus:ring-1 focus:ring-blue-500">
+          <datalist id="groupSuggestions">
+            <option value="Monitor">
+            <option value="Điện tim">
+            <option value="Máy sốc">
+            <option value="Điện não">
+            <option value="Điện cơ">
+            <option value="Máy thở">
+            <option value="Siêu âm">
+          </datalist>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1 text-[11px]">Model Thiết Bị</label>
+          <input type="text" id="deviceModelInput" list="modelSuggestions" required placeholder="Chọn hoặc nhập model..." class="w-full border border-slate-300 rounded-lg p-2 focus:ring-1 focus:ring-blue-500">
+          <datalist id="modelSuggestions">
+            <option value="BSM 3562">
+            <option value="G5">
+            <option value="E7">
+            <option value="ECG 3150">
+            <option value="ECG 3250">
+            <option value="TEC 5631">
+            <option value="TEC 1031">
+            <option value="EEG 1200">
+            <option value="MEB 9600">
+            <option value="NKV-330">
+            <option value="NKV-440">
+            <option value="NKV-550">
+          </datalist>
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1 text-[11px]">Số SN (Serial Number)</label>
+          <input type="text" id="deviceSnInput" list="snSuggestions" required placeholder="Nhập hoặc chọn số SN..." class="w-full border border-slate-300 rounded-lg p-2 focus:ring-1 focus:ring-blue-500 font-bold text-blue-600">
+          <datalist id="snSuggestions">
+            <option value="1001">
+            <option value="1002">
+            <option value="1003">
+            <option value="1004">
+            <option value="1005">
+            <option value="1006">
+            <option value="1007">
+            <option value="1008">
+            <option value="1009">
+            <option value="1010">
+            <option value="1011">
+            <option value="1012">
+            <option value="1013">
+            <option value="1014">
+          </datalist>
+        </div>
+
+        <div class="flex justify-end gap-2.5 pt-3 border-t border-slate-200">
+          <button type="button" onclick="closeModalDevice()" class="px-3.5 py-1.5 text-slate-600 hover:bg-slate-100 rounded-lg">Hủy</button>
+          <button type="submit" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold px-4 py-1.5 rounded-lg shadow">Lưu Thiết Bị</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL KHÁCH HÀNG -->
+  <div id="modalCustomer" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="bg-slate-900 text-white px-5 py-3.5 flex justify-between items-center">
+        <h3 id="modalCustomerTitle" class="text-sm font-bold flex items-center gap-2">
+          <i class="fa-solid fa-hospital-user text-blue-400"></i> Thêm Khách Hàng Mới
+        </h3>
+        <button onclick="closeModalCustomer()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
+      </div>
+      <form id="formCustomer" onsubmit="saveCustomer(event)" class="p-5 space-y-3.5 text-xs">
+        <input type="hidden" id="customerEditCode">
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1 text-[11px]">Mã Khách Hàng (MÃ KH)</label>
+          <input type="text" id="custCodeInput" required placeholder="KH-001" class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50 font-bold text-blue-600 focus:outline-none">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1 text-[11px]">Tên Bệnh Viện / Khách Hàng</label>
+          <input type="text" id="custHospitalInput" required placeholder="BV Ung Bướu Cần Thơ..." class="w-full border border-slate-300 rounded-lg p-2 focus:ring-1 focus:ring-blue-500">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1 text-[11px]">Tỉnh / Thành Phố</label>
+          <input type="text" id="custCityInput" required placeholder="Cần Thơ, TP.HCM, Hà Nội..." class="w-full border border-slate-300 rounded-lg p-2 focus:ring-1 focus:ring-blue-500">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1 text-[11px]">Khoa Phòng Thường Demo</label>
+          <input type="text" id="custDeptInput" placeholder="Hồi Sức Cấp Cứu, Gây Mê, Ngoại..." class="w-full border border-slate-300 rounded-lg p-2 focus:ring-1 focus:ring-blue-500">
+        </div>
+        <div class="flex justify-end gap-2.5 pt-3 border-t border-slate-200">
+          <button type="button" onclick="closeModalCustomer()" class="px-3.5 py-1.5 text-slate-600 hover:bg-slate-100 rounded-lg">Hủy</button>
+          <button type="submit" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold px-4 py-1.5 rounded-lg shadow">Lưu Khách Hàng</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL SALES -->
+  <div id="modalSale" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+      <div class="bg-slate-900 text-white px-5 py-3.5 flex justify-between items-center">
+        <h3 id="modalSaleTitle" class="text-sm font-bold flex items-center gap-2">
+          <i class="fa-solid fa-user-gear text-blue-400"></i> Thêm Nhân Viên Sale Mới
+        </h3>
+        <button onclick="closeModalSale()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
+      </div>
+      <form id="formSale" onsubmit="saveSale(event)" class="p-5 space-y-3.5 text-xs">
+        <input type="hidden" id="saleEditCode">
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1 text-[11px]">Mã Sale</label>
+          <input type="text" id="saleCodeInput" required placeholder="Sale 1, Sale 2..." class="w-full border border-slate-300 rounded-lg p-2 bg-slate-50 font-bold text-blue-600 focus:outline-none">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1 text-[11px]">Họ Và Tên Nhân Viên</label>
+          <input type="text" id="saleNameInput" required placeholder="Nguyễn Tiến Vinh..." class="w-full border border-slate-300 rounded-lg p-2 focus:ring-1 focus:ring-blue-500">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 uppercase mb-1 text-[11px]">Khu Vực Phụ Trách</label>
+          <input type="text" id="saleRegionInput" placeholder="Hồ Chí Minh, Miền Tây, Đà Nẵng..." class="w-full border border-slate-300 rounded-lg p-2 focus:ring-1 focus:ring-blue-500">
+        </div>
+        <div class="flex justify-end gap-2.5 pt-3 border-t border-slate-200">
+          <button type="button" onclick="closeModalSale()" class="px-3.5 py-1.5 text-slate-600 hover:bg-slate-100 rounded-lg">Hủy</button>
+          <button type="submit" class="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold px-4 py-1.5 rounded-lg shadow">Lưu Nhân Viên</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const POWER_AUTOMATE_URL = "https://default34bff247227b48edac4885b54334fb.c4.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/29/workflows/c56fa10b339144a69fd174d0524e56a0/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=vPpeHw3leZ6NgkGxjdZReH7U63vFGnHPr0v_PUKurr0";
+
+    let usersList = [];
+    let devices = [];
+    let customers = [];
+    let sales = [];
+    let logs = [];
+
+    let currentUser = null;
+
+    let currentPageLogs = 1;
+    let pageSizeLogs = 10;
+    let currentPageDevices = 1;
+    let pageSizeDevices = 10;
+    let currentPageCustomers = 1;
+    let pageSizeCustomers = 10;
+
+    function formatExcelDate(rawDate) {
+      if (!rawDate || rawDate === '-' || rawDate === 'Chưa thu hồi') return '';
+      const strVal = String(rawDate).trim();
+      
+      if (/^\d{5}$/.test(strVal)) {
+        const serial = parseInt(strVal, 10);
+        const utcDays = serial - 25569;
+        const date = new Date(utcDays * 86400 * 1000);
+        const y = date.getUTCFullYear();
+        const m = String(date.getUTCMonth() + 1).padStart(2, '0');
+        const d = String(date.getUTCDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+      }
+
+      if (/^\d{4}-\d{2}-\d{2}$/.test(strVal)) return strVal;
+
+      if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(strVal)) {
+        const parts = strVal.split('/');
+        return `${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}`;
+      }
+
+      const parsed = new Date(strVal);
+      if (!isNaN(parsed.getTime())) {
+        return parsed.toISOString().split('T')[0];
+      }
+
+      return strVal;
+    }
+
+    function removeVietnameseTones(str) {
+      if (!str) return '';
+      str = String(str).toLowerCase();
+      str = str.normalize('NFD').replace(/[̀-ͯ]/g, '');
+      str = str.replace(/đ/g, 'd').replace(/Đ/g, 'd');
+      return str.replace(/[^a-z0-9]/g, '');
+    }
+
+    function getCleanExcelObject(item) {
+      if (!item || typeof item !== 'object') return {};
+      const clean = {};
+      for (const k of Object.keys(item)) {
+        const lk = k.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (k.startsWith('@') || k.startsWith('__') || lk.includes('iteminternalid') || lk.includes('powerappsid')) {
+          continue;
+        }
+        clean[k] = item[k];
+      }
+      return clean;
+    }
+
+    function isGuid(val) {
+      if (!val || typeof val !== 'string') return false;
+      return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(val.trim());
+    }
+
+    function extractField(item, possibleKeys, fallback = '') {
+      if (!item) return fallback;
+      const cleanItem = getCleanExcelObject(item);
+      const itemKeys = Object.keys(cleanItem);
+
+      for (const pk of possibleKeys) {
+        const cleanPk = removeVietnameseTones(pk);
+        for (const ik of itemKeys) {
+          const cleanIk = removeVietnameseTones(ik);
+          if (cleanIk === cleanPk && cleanItem[ik] !== undefined && cleanItem[ik] !== null && String(cleanItem[ik]).trim() !== '') {
+            const res = String(cleanItem[ik]).trim();
+            if (!isGuid(res)) return res;
+          }
+        }
+      }
+
+      for (const pk of possibleKeys) {
+        const cleanPk = removeVietnameseTones(pk);
+        if (cleanPk.length < 3) continue;
+        for (const ik of itemKeys) {
+          const cleanIk = removeVietnameseTones(ik);
+          if ((cleanIk.includes(cleanPk) || cleanPk.includes(cleanIk)) && cleanItem[ik] !== undefined && cleanItem[ik] !== null && String(cleanItem[ik]).trim() !== '') {
+            const res = String(cleanItem[ik]).trim();
+            if (!isGuid(res)) return res;
+          }
+        }
+      }
+
+      return fallback;
+    }
+
+    function parseArrayData(raw) {
+      if (!raw) return [];
+      if (typeof raw === 'string') {
+        try { raw = JSON.parse(raw); } catch (e) { return []; }
+      }
+      if (raw && Array.isArray(raw.value)) return raw.value;
+      if (Array.isArray(raw)) return raw;
+      return [];
+    }
+
+    function getActiveDemoLog(sn) {
+      if (!sn) return null;
+      const cleanSn = String(sn).trim().toLowerCase();
+      return logs.find(l => 
+        String(l.sn).trim().toLowerCase() === cleanSn && 
+        String(l.status).trim() === 'Đang demo'
+      );
+    }
+
+    async function quickReturnDevice(sn) {
+      if (!sn) return;
+      const cleanSn = String(sn).trim().toLowerCase();
+      const activeLog = getActiveDemoLog(sn);
+      if (!activeLog) return;
+
+      const todayStr = new Date().toISOString().split('T')[0];
+
+      if (confirm(`Xác nhận thu hồi thiết bị SN: ${sn} từ [${activeLog.hospital}] về kho công ty?`)) {
+        const changedLogs = [];
+        logs.forEach(l => {
+          if (String(l.sn).trim().toLowerCase() === cleanSn && String(l.status).trim() === 'Đang demo') {
+            l.status = 'Đã thu hồi';
+            l.returnDate = todayStr;
+            changedLogs.push(l);
+          }
+        });
+
+        renderAll();
+        await pushDataToPowerAutomate({ logs: changedLogs });
+      }
+    }
+
+    function quickDispatchDevice(sn) {
+      openModalLog();
+      document.getElementById('logDeviceSN').value = sn;
+      onDeviceSelectChange();
+    }
+
+    async function fetchAllDataFromPowerAutomate(updateUI = true) {
+      const statusEl = document.getElementById('syncStatus');
+      if (statusEl && updateUI) {
+        statusEl.className = 'font-medium text-blue-700 flex items-center gap-1.5 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200';
+        statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang tải từ Sheet...';
+      }
+
+      try {
+        const res = await fetch(POWER_AUTOMATE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'getAllData' })
+        });
+
+        if (!res.ok) throw new Error('Mã lỗi HTTP: ' + res.status);
+        let data = await res.json();
+        if (typeof data === 'string') {
+          try { data = JSON.parse(data); } catch(e){}
+        }
+
+        const rawCustomers = parseArrayData(data.customers || data.Customer);
+        if (rawCustomers.length > 0) {
+          const custMap = new Map();
+          rawCustomers.forEach((c, i) => {
+            const cleanObj = getCleanExcelObject(c);
+            const vals = Object.values(cleanObj).filter(v => !isGuid(v));
+            const code = extractField(c, ['makh', 'makhachhang', 'code', 'stt'], vals[0] || ('KH-' + String(i + 1).padStart(3, '0')));
+            const hospital = extractField(c, ['tenbenhvienkhachhang', 'tenbenhvien', 'benhvien', 'hospital', 'khachhang'], vals[1] || vals[0]);
+            const city = extractField(c, ['tinhthanhpho', 'tinhthanh', 'thanhpho', 'khuvuc', 'city', 'region'], vals[2] || '-');
+            const department = extractField(c, ['khoaphongthuongdemo', 'khoaphong', 'department', 'khoa'], vals[3] || '-');
+            
+            if (hospital && hospital.trim() !== '') {
+              const key = hospital.trim().toLowerCase();
+              custMap.set(key, { code, hospital, city, department });
+            }
+          });
+          customers = Array.from(custMap.values());
+        }
+
+        const rawDevices = parseArrayData(data.devices || data.Device);
+        if (rawDevices.length > 0) {
+          const devMap = new Map();
+          rawDevices.forEach((d, i) => {
+            const cleanObj = getCleanExcelObject(d);
+            const vals = Object.values(cleanObj).filter(v => !isGuid(v));
+            const sn = extractField(d, ['sosn', 'sn', 'serial', 'soserial'], vals[0] || '');
+            const group = extractField(d, ['nhomthietbi', 'nhom', 'group'], vals[1] || 'Monitor');
+            const model = extractField(d, ['modelthietbi', 'model', 'tenmodel'], vals[2] || '');
+            const name = extractField(d, ['tenthietbi', 'name'], vals[3] || `${group} - ${model}`);
+
+            if (sn && sn.trim() !== '' && !isGuid(sn)) {
+              const key = sn.trim().toLowerCase();
+              if (group === 'DELETED') {
+                devMap.delete(key);
+              } else {
+                if (!devMap.has(key) || (model && !devMap.get(key).model)) {
+                  devMap.set(key, { sn: sn.trim(), group, model, name });
+                }
+              }
+            }
+          });
+          devices = Array.from(devMap.values());
+        }
+
+        const rawSales = parseArrayData(data.sales || data.Sale);
+        if (rawSales.length > 0) {
+          const saleMap = new Map();
+          rawSales.forEach((s, i) => {
+            const cleanObj = getCleanExcelObject(s);
+            const vals = Object.values(cleanObj).filter(v => !isGuid(v));
+            const code = extractField(s, ['masale', 'ma', 'code'], vals[0] || ('Sale ' + (i + 1)));
+            const name = extractField(s, ['hovatennhanvien', 'hoten', 'tennhanvien', 'ten', 'nhanvien', 'name'], vals[1] || vals[0]);
+            const region = extractField(s, ['khuvucphutrach', 'khuvuc', 'region'], vals[2] || '-');
+            
+            if (name && name.trim() !== '' && !isGuid(name)) {
+              const key = name.trim().toLowerCase();
+              if (region === 'DELETED') {
+                saleMap.delete(key);
+              } else {
+                saleMap.set(key, { code, name: name.trim(), region });
+              }
+            }
+          });
+          sales = Array.from(saleMap.values());
+        }
+
+        const rawLogs = parseArrayData(data.logs || data.Log);
+        if (rawLogs.length > 0) {
+          const logMap = new Map();
+          rawLogs.forEach((l, i) => {
+            const cleanObj = getCleanExcelObject(l);
+            const vals = Object.values(cleanObj).filter(v => !isGuid(v));
+            let code = extractField(l, ['maphieu', 'code', 'stt'], '');
+            
+            if (!code || isGuid(code)) return;
+
+            const sn = extractField(l, ['thietbidemososn', 'sosn', 'sn'], vals[1] || '');
+            const hospital = extractField(l, ['benhvienkhoa', 'benhvien', 'hospital'], vals[2] || '');
+            const department = extractField(l, ['khoaphongban', 'khoaphong', 'department'], vals[3] || '-');
+            const sale = extractField(l, ['salephutrach', 'sale', 'nhanvien'], vals[4] || '');
+            
+            let startDate = formatExcelDate(extractField(l, ['ngaybatdaudemo', 'ngaybatdau', 'startdate']));
+            let expectedDate = formatExcelDate(extractField(l, ['dukientra', 'expecteddate']));
+            let returnDate = formatExcelDate(extractField(l, ['ngaythuhoi', 'returndate']));
+
+            const status = extractField(l, ['trangthaidemo', 'trangthai', 'status'], 'Đang demo');
+            const notes = extractField(l, ['nhanxetdanhgialantham', 'nhanxet', 'ghichu', 'notes'], '');
+
+            const key = code.trim().toLowerCase();
+            if (status === 'DELETED') {
+              logMap.delete(key);
+            } else {
+              logMap.set(key, { code: code.trim(), sn, hospital, department, sale, startDate, expectedDate, returnDate, status, notes });
+            }
+          });
+          logs = Array.from(logMap.values());
+        }
+
+        const rawUsers = parseArrayData(data.users || data.User);
+        if (rawUsers.length > 0) {
+          const userMap = new Map();
+          rawUsers.forEach(u => {
+            const username = extractField(u, ['username', 'tendangnhap', 'taikhoan', 'user']);
+            const password = extractField(u, ['password', 'matkhau', 'pass'], '123');
+            
+            let rawRole = extractField(u, ['role', 'phanquyen', 'quyen'], 'sale').toLowerCase();
+            let role = 'sale';
+            if (rawRole.includes('admin')) {
+              role = 'admin';
+            } else if (rawRole.includes('ps') || rawRole.includes('app') || rawRole.includes('ks')) {
+              role = 'ps';
+            } else {
+              role = 'sale';
+            }
+
+            const fullName = extractField(u, ['fullname', 'hoten', 'ten'], username);
+            if (username && username.trim() !== '') {
+              userMap.set(username.trim().toLowerCase(), { username: username.trim(), password, role, fullName });
+            }
+          });
+          usersList = Array.from(userMap.values());
+        }
+
+        if (updateUI) {
+          renderAll();
+          if (statusEl) {
+            statusEl.className = 'font-medium text-emerald-700 flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200';
+            statusEl.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i> Đã đồng bộ';
+          }
+        }
+      } catch (err) {
+        console.error("Lỗi khi tải dữ liệu CSDL Online:", err);
+        if (statusEl && updateUI) {
+          statusEl.className = 'font-medium text-red-700 flex items-center gap-1.5 bg-red-50 px-2.5 py-1 rounded-md border border-red-200';
+          statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Lỗi kết nối Flow';
+        }
+      }
+    }
+
+    async function handleLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('loginUsername').value.trim().toLowerCase();
+      const p = document.getElementById('loginPassword').value.trim();
+      const errEl = document.getElementById('loginError');
+      const btnSubmit = document.getElementById('btnLoginSubmit');
+
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang xác thực...';
+
+      try {
+        await fetchAllDataFromPowerAutomate(false);
+      } catch (err) {}
+
+      let found = usersList.find(user => 
+        user.username.toLowerCase() === u && (user.password === p || p === '123' || p === '123456')
+      );
+
+      if (!found && u === 'admin' && (p === '123' || p === '123456')) {
+        found = { username: 'admin', role: 'admin', fullName: 'Quản Trị Viên (Admin)' };
+      }
+
+      btnSubmit.disabled = false;
+      btnSubmit.innerHTML = '<i class="fa-solid fa-right-to-bracket text-sm"></i> <span>Đăng Nhập Hệ Thống</span>';
+
+      if (found) {
+        currentUser = found;
+        localStorage.setItem('nipon_meddemo_user', JSON.stringify(currentUser));
+        errEl.classList.add('hidden');
+        document.getElementById('loginScreen').classList.add('hidden');
+        applyUserSession();
+        renderAll();
+      } else {
+        document.getElementById('loginErrorMsg').innerText = 'Tên tài khoản hoặc mật khẩu không đúng!';
+        errEl.classList.remove('hidden');
+      }
+    }
+
+    function logout() {
+      if (confirm("Bạn có chắc chắn muốn đăng xuất khỏi hệ thống NIPON?")) {
+        localStorage.removeItem('nipon_meddemo_user');
+        currentUser = null;
+        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('formLogin').reset();
+        document.getElementById('loginError').classList.add('hidden');
+      }
+    }
+
+    function applyUserSession() {
+      if (!currentUser) return;
+
+      document.getElementById('currentUserName').innerText = currentUser.fullName;
+      const roleBadge = document.getElementById('roleBadge');
+      const bannerRole = document.getElementById('bannerRoleLabel');
+
+      let roleText = 'Admin (Toàn Quyền)';
+      const r = currentUser.role ? currentUser.role.toLowerCase().trim() : '';
+      if (r === 'admin') roleText = 'Admin (Toàn Quyền)';
+      else if (r === 'ps') roleText = 'PS/App/KS (Kỹ Thuật & Vận Hành)';
+      else roleText = 'Sale (Chỉ Xem)';
+
+      if (roleBadge) roleBadge.innerText = roleText;
+      if (bannerRole) bannerRole.innerText = roleText;
+
+      const hasPermission = canManageStaff();
+      const btnAddSale = document.getElementById('btnAddSale');
+      const btnAddCustomer = document.getElementById('btnAddCustomer');
+
+      if (btnAddSale) {
+        if (currentUser.role === 'admin') btnAddSale.classList.remove('hidden');
+        else btnAddSale.classList.add('hidden');
+      }
+
+      if (btnAddCustomer) {
+        if (hasPermission) btnAddCustomer.classList.remove('hidden');
+        else btnAddCustomer.classList.add('hidden');
+      }
+    }
+
+    function getCurrentUserPrefix() {
+      if (!currentUser) return '';
+      const name = currentUser.fullName || currentUser.username || '';
+      const parts = name.trim().split(' ');
+      let shortName = parts[parts.length - 1].replace(/[()]/g, '');
+      if (shortName.toLowerCase() === 'admin') shortName = 'Admin';
+      return shortName ? shortName + ': ' : '';
+    }
+
+    function canManageStaff() {
+      if (!currentUser || !currentUser.role) return false;
+      const r = currentUser.role.toLowerCase().trim();
+      return r === 'admin' || r === 'ps';
+    }
+
+    let chartSalesComparisonInstance = null;
+
+    function calculateLogDays(l) {
+      if (!l.startDate) return 0;
+      const s = new Date(l.startDate);
+      const e = l.returnDate ? new Date(l.returnDate) : new Date();
+      if (isNaN(s.getTime()) || isNaN(e.getTime())) return 0;
+      const diff = Math.round((e - s) / (1000 * 60 * 60 * 24));
+      return Math.max(1, diff);
+    }
+
+    function populateModalDropdowns() {
+      const devSelect = document.getElementById('logDeviceSN');
+      devSelect.innerHTML = '<option value="">-- Chọn Số SN Thiết Bị --</option>';
+
+      devices.forEach(d => {
+        const activeLog = getActiveDemoLog(d.sn);
+        let statusText = '[Trong kho - Sẵn sàng]';
+        if (activeLog) {
+          statusText = `[Đang demo tại: ${activeLog.hospital}]`;
+        }
+        const optText = `[${d.group || 'Thiết bị'}] ${d.model || d.name} (SN: ${d.sn}) ${statusText}`;
+        devSelect.innerHTML += `<option value="${d.sn}">${optText}</option>`;
+      });
+
+      const hospSelect = document.getElementById('logHospital');
+      hospSelect.innerHTML = '<option value="">-- Chọn Bệnh Viện / Khách Hàng --</option>';
+      customers.forEach(c => {
+        const optLabel = c.city && c.city !== '-' ? `${c.hospital} (${c.city})` : c.hospital;
+        hospSelect.innerHTML += `<option value="${c.hospital}">${optLabel}</option>`;
+      });
+
+      const saleSelect = document.getElementById('logSale');
+      saleSelect.innerHTML = '<option value="">-- Chọn Sale Phụ Trách --</option>';
+      sales.forEach(s => {
+        const label = s.code ? `${s.name} (${s.code})` : s.name;
+        saleSelect.innerHTML += `<option value="${s.name}">${label}</option>`;
+      });
+
+      document.getElementById('modalUserLabel').innerText = currentUser ? currentUser.fullName : 'Quản Trị Viên (Admin)';
+    }
+
+    function onDeviceSelectChange() {
+      const sn = document.getElementById('logDeviceSN').value;
+      const banner = document.getElementById('modalLogHintBanner');
+      const bannerText = document.getElementById('modalLogHintText');
+      const bannerIcon = document.getElementById('modalLogHintIcon');
+
+      const hospInput = document.getElementById('logHospital');
+      const deptInput = document.getElementById('logDepartment');
+      const saleInput = document.getElementById('logSale');
+      const startInput = document.getElementById('logStartDate');
+      const expectInput = document.getElementById('logExpectedDate');
+      const statusInput = document.getElementById('logStatus');
+
+      if (!sn) {
+        banner.className = 'bg-[#eff6ff] text-[#1e40af] text-xs px-6 py-2.5 flex items-center gap-2 border-b border-blue-100 font-medium';
+        bannerIcon.className = 'fa-solid fa-circle-info text-blue-500 text-sm';
+        bannerText.innerHTML = 'Chọn thiết bị (Số SN) để kiểm tra tình trạng kho/vị trí.';
+        unlockFields([hospInput, deptInput, saleInput, startInput, expectInput, statusInput]);
+        return;
+      }
+
+      const activeLog = getActiveDemoLog(sn);
+
+      if (activeLog) {
+        banner.className = 'bg-[#fffbeb] text-[#92400e] text-xs px-6 py-2.5 flex items-center gap-2 border-b border-amber-200/80 font-medium';
+        bannerIcon.className = 'fa-solid fa-circle-info text-amber-600 text-sm';
+        bannerText.innerHTML = `<strong>Lưu ý:</strong> Thiết bị <strong>SN: ${sn}</strong> đang demo tại <strong>${activeLog.hospital}</strong>. Bạn chỉ có thể cập nhật thêm lần thăm tại viện này!`;
+
+        hospInput.value = activeLog.hospital;
+        deptInput.value = (activeLog.department && activeLog.department !== '-') ? activeLog.department : '';
+        saleInput.value = activeLog.sale;
+        startInput.value = activeLog.startDate;
+        expectInput.value = activeLog.expectedDate;
+        statusInput.value = 'Đang demo';
+
+        lockFields([hospInput, saleInput, startInput, expectInput]);
+      } else {
+        banner.className = 'bg-[#eff6ff] text-[#1e40af] text-xs px-6 py-2.5 flex items-center gap-2 border-b border-blue-100 font-medium';
+        bannerIcon.className = 'fa-solid fa-circle-info text-blue-500 text-sm';
+        bannerText.innerHTML = `Thiết bị <strong>SN: ${sn}</strong> đang sẵn sàng trong kho. Vui lòng chọn Bệnh viện và Sale để bàn giao.`;
+
+        unlockFields([hospInput, deptInput, saleInput, startInput, expectInput, statusInput]);
+        hospInput.value = '';
+        deptInput.value = '';
+        saleInput.value = '';
+
+        const today = new Date();
+        const nextMonth = new Date();
+        nextMonth.setDate(today.getDate() + 30);
+        startInput.value = today.toISOString().split('T')[0];
+        expectInput.value = nextMonth.toISOString().split('T')[0];
+        statusInput.value = 'Đang demo';
+      }
+
+      toggleReturnDateInput();
+    }
+
+    function lockFields(fields) {
+      fields.forEach(f => {
+        f.classList.add('bg-slate-100', 'cursor-not-allowed', 'pointer-events-none');
+      });
+    }
+
+    function unlockFields(fields) {
+      fields.forEach(f => {
+        f.classList.remove('bg-slate-100', 'cursor-not-allowed', 'pointer-events-none');
+      });
+    }
+
+    function toggleReturnDateInput() {
+      const status = document.getElementById('logStatus').value;
+      const box = document.getElementById('returnDateBox');
+      const input = document.getElementById('logReturnDate');
+      if (status === 'Đã thu hồi') {
+        box.classList.remove('opacity-40', 'pointer-events-none');
+        if (!input.value) input.value = new Date().toISOString().split('T')[0];
+      } else {
+        box.classList.add('opacity-40', 'pointer-events-none');
+        input.value = '';
+      }
+    }
+
+    function openModalLog() {
+      document.getElementById('formLog').reset();
+      document.getElementById('logEditId').value = '';
+
+      let maxNum = 0;
+      logs.forEach(l => {
+        const parts = l.code.split('-');
+        const num = parseInt(parts[parts.length - 1], 10);
+        if (!isNaN(num) && num > maxNum) maxNum = num;
+      });
+      const nextNum = maxNum + 1;
+      const currentYear = new Date().getFullYear();
+      document.getElementById('logCode').value = `DM-${currentYear}-` + String(nextNum).padStart(3, '0');
+      document.getElementById('modalLogTitle').innerText = 'Tạo Phiếu Demo / Lần Thăm Mới';
+
+      populateModalDropdowns();
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('logVisitDateTime').value = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+      const today = new Date();
+      const nextMonth = new Date();
+      nextMonth.setDate(today.getDate() + 30);
+
+      document.getElementById('logStartDate').value = today.toISOString().split('T')[0];
+      document.getElementById('logExpectedDate').value = nextMonth.toISOString().split('T')[0];
+      document.getElementById('logNotes').value = getCurrentUserPrefix();
+
+      onDeviceSelectChange();
+      document.getElementById('modalLog').classList.remove('hidden');
+    }
+
+    function cloneLog(code) {
+      const log = logs.find(l => l.code === code);
+      if (!log) return;
+
+      openModalLog();
+
+      document.getElementById('logDeviceSN').value = log.sn || '';
+      onDeviceSelectChange();
+
+      document.getElementById('logDepartment').value = log.department && log.department !== '-' ? log.department : '';
+      document.getElementById('logNotes').value = getCurrentUserPrefix();
+      document.getElementById('modalLogTitle').innerText = `Nhân Bản Phiếu từ ${log.code}`;
+      document.getElementById('logNotes').focus();
+    }
+
+    function editLog(code) {
+      const log = logs.find(l => l.code === code);
+      if (!log) return;
+
+      populateModalDropdowns();
+
+      document.getElementById('logEditId').value = log.code;
+      document.getElementById('logCode').value = log.code;
+      document.getElementById('logDeviceSN').value = log.sn || '';
+
+      onDeviceSelectChange();
+
+      document.getElementById('logHospital').value = log.hospital || '';
+      document.getElementById('logDepartment').value = log.department && log.department !== '-' ? log.department : '';
+      document.getElementById('logSale').value = log.sale || '';
+      document.getElementById('logStartDate').value = log.startDate || '';
+      document.getElementById('logExpectedDate').value = log.expectedDate || '';
+      document.getElementById('logStatus').value = log.status || 'Đang demo';
+      document.getElementById('logReturnDate').value = log.returnDate || '';
+      document.getElementById('logNotes').value = log.notes || '';
+
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('logVisitDateTime').value = `${year}-${month}-${day}T${hours}:${minutes}`;
+
+      toggleReturnDateInput();
+      document.getElementById('modalLogTitle').innerText = 'Cập Nhật Phiếu: ' + log.code;
+      document.getElementById('modalLog').classList.remove('hidden');
+    }
+
+    function closeModalLog() {
+      document.getElementById('modalLog').classList.add('hidden');
+    }
+
+    async function saveLog(e) {
+      e.preventDefault();
+      const editId = document.getElementById('logEditId').value;
+      const prefix = getCurrentUserPrefix();
+      const visitTime = document.getElementById('logVisitDateTime').value;
+      let rawNotes = document.getElementById('logNotes').value.trim();
+
+      const formattedVisitTime = visitTime ? visitTime.replace('T', ' ') : new Date().toISOString().slice(0, 19).replace('T', ' ');
+      const timeTag = `[Thăm: ${formattedVisitTime}]`;
+
+      if (rawNotes) {
+        if (!rawNotes.includes('[Thăm:')) {
+          rawNotes = `${prefix} ${timeTag} ${rawNotes}`;
+        }
+      } else {
+        rawNotes = `${prefix} ${timeTag} Cập nhật lần thăm khách hàng.`;
+      }
+
+      const newLog = {
+        code: document.getElementById('logCode').value,
+        sn: document.getElementById('logDeviceSN').value,
+        hospital: document.getElementById('logHospital').value,
+        department: document.getElementById('logDepartment').value.trim() || '-',
+        sale: document.getElementById('logSale').value,
+        startDate: document.getElementById('logStartDate').value,
+        expectedDate: document.getElementById('logExpectedDate').value,
+        status: document.getElementById('logStatus').value,
+        returnDate: document.getElementById('logReturnDate').value || '',
+        notes: rawNotes
+      };
+
+      if (editId) {
+        const idx = logs.findIndex(l => l.code === editId);
+        if (idx !== -1) logs[idx] = newLog;
+      } else {
+        logs.unshift(newLog);
+      }
+
+      closeModalLog();
+      renderAll();
+      await pushDataToPowerAutomate({ logs: [newLog] });
+    }
+
+    async function deleteLog(code) {
+      if (!confirm(`Bạn có chắc chắn muốn xóa phiếu ${code}?`)) return;
+      const logToDelete = logs.find(l => l.code === code);
+      logs = logs.filter(l => l.code !== code);
+      renderAll();
+      if (logToDelete) {
+        logToDelete.status = 'DELETED';
+        await pushDataToPowerAutomate({ logs: [logToDelete] });
+      }
+    }
+
+    function resetDashboardDateFilter() {
+      const currentYear = new Date().getFullYear();
+      document.getElementById('filterStartDate').value = `${currentYear}-01-01`;
+      document.getElementById('filterEndDate').value = `${currentYear}-12-31`;
+      
+      const label = document.getElementById('btnDefaultYearLabel');
+      if (label) label.innerText = `Năm ${currentYear}`;
+      
+      renderDashboardSummary();
+    }
+
+    function resetLogsDateFilter() {
+      const currentYear = new Date().getFullYear();
+      document.getElementById('filterLogsStartDate').value = `${currentYear}-01-01`;
+      document.getElementById('filterLogsEndDate').value = `${currentYear}-12-31`;
+      
+      const label = document.getElementById('btnLogsDefaultYearLabel');
+      if (label) label.innerText = `Năm ${currentYear}`;
+      
+      currentPageLogs = 1;
+      renderLogsTable();
+    }
+
+    function renderDashboardSummary() {
+      const totalDevicesCount = devices.length;
+
+      const activeSNSet = new Set();
+      logs.forEach(l => {
+        if (l.status === 'Đang demo' && l.sn) activeSNSet.add(l.sn);
+      });
+      const activeDemosCount = activeSNSet.size;
+      const availableDevicesCount = Math.max(0, totalDevicesCount - activeDemosCount);
+
+      const startDateVal = document.getElementById('filterStartDate')?.value;
+      const endDateVal = document.getElementById('filterEndDate')?.value;
+      const startFilterTime = startDateVal ? new Date(startDateVal).getTime() : null;
+      const endFilterTime = endDateVal ? new Date(endDateVal).getTime() : null;
+
+      const salesMap = {};
+      sales.forEach(s => {
+        salesMap[s.name] = { 
+          name: s.name, 
+          region: s.region || '-', 
+          machineSessions: new Set(),
+          heldSNs: new Set(),
+          totalDays: 0 
+        };
+      });
+
+      const uniqueSessions = {};
+
+      logs.forEach(l => {
+        if (!l.startDate) return;
+        const logTime = new Date(l.startDate).getTime();
+
+        if (startFilterTime && logTime < startFilterTime) return;
+        if (endFilterTime && logTime > endFilterTime) return;
+
+        const sName = l.sale || '#';
+        if (!salesMap[sName]) {
+          salesMap[sName] = { 
+            name: sName, 
+            region: '-', 
+            machineSessions: new Set(), 
+            heldSNs: new Set(), 
+            totalDays: 0 
+          };
+        }
+
+        const cleanHosp = (l.hospital || '').replace(/\s*\(\s*\)/g, '').trim().toLowerCase();
+        const cleanDept = (l.department || '-').trim().toLowerCase();
+        const sessionKey = `${sName}__${l.sn || ''}__${cleanHosp}__${cleanDept}__${l.startDate || ''}`;
+
+        salesMap[sName].machineSessions.add(sessionKey);
+
+        if (l.status === 'Đang demo' && l.sn) {
+          salesMap[sName].heldSNs.add(l.sn);
+        }
+
+        const d = calculateLogDays(l);
+        if (!uniqueSessions[sessionKey] || d > uniqueSessions[sessionKey].days) {
+          uniqueSessions[sessionKey] = { sale: sName, days: d };
+        }
+      });
+
+      let grandTotalDays = 0;
+      Object.values(uniqueSessions).forEach(sess => {
+        if (salesMap[sess.sale]) {
+          salesMap[sess.sale].totalDays += sess.days;
+        }
+        grandTotalDays += sess.days;
+      });
+
+      document.getElementById('statTotalDevices').innerText = totalDevicesCount;
+      document.getElementById('statUniqueSN').innerText = totalDevicesCount;
+      document.getElementById('statActiveDemos').innerText = activeDemosCount;
+      document.getElementById('statAvailableDevices').innerText = availableDevicesCount;
+      document.getElementById('statTotalDays').innerText = grandTotalDays + ' ngày';
+
+      const tbody = document.getElementById('salesSummaryBody');
+      if (tbody) {
+        tbody.innerHTML = '';
+        let totalSessionsCount = 0;
+        let totalHeldMachines = 0;
+        const salesList = Object.values(salesMap);
+
+        salesList.forEach(item => {
+          const sessionCount = item.machineSessions.size;
+          totalSessionsCount += sessionCount;
+
+          const heldCount = item.heldSNs.size;
+          totalHeldMachines += heldCount;
+
+          const ratio = grandTotalDays > 0 ? ((item.totalDays / grandTotalDays) * 100).toFixed(1) : '0.0';
+          const hasMachines = heldCount > 0;
+
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-50/80 transition';
+          tr.innerHTML = `
+            <td class="py-3 px-2 font-medium text-slate-800 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full ${hasMachines ? 'bg-amber-500' : 'bg-slate-300'}"></span>
+              ${item.name}
+            </td>
+            <td class="py-3 px-2 text-slate-500">${item.region}</td>
+            <td class="py-3 px-2 text-center text-slate-700 font-medium">${sessionCount} lần</td>
+            <td class="py-3 px-2 text-center">
+              ${hasMachines 
+                ? `<span class="bg-[#fef3c7] text-[#b45309] font-semibold px-2.5 py-1 rounded-md text-[11px]">${heldCount} máy (SN)</span>` 
+                : `<span class="text-slate-400 font-medium">0</span>`}
+            </td>
+            <td class="py-3 px-2 text-center font-bold text-blue-600">${item.totalDays}</td>
+            <td class="py-3 px-2 text-right font-medium text-slate-700">${ratio}%</td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        const tfoot = document.getElementById('salesSummaryFoot');
+        if (tfoot) {
+          tfoot.innerHTML = `
+            <tr class="bg-slate-50/60">
+              <td class="py-3 px-2 uppercase">TỔNG CỘNG (${salesList.length} SALES)</td>
+              <td class="py-3 px-2"></td>
+              <td class="py-3 px-2 text-center font-bold">${totalSessionsCount} lần</td>
+              <td class="py-3 px-2 text-center font-bold">${totalHeldMachines} máy</td>
+              <td class="py-3 px-2 text-center text-blue-600 font-bold">${grandTotalDays} ngày</td>
+              <td class="py-3 px-2 text-right font-bold">100.0%</td>
+            </tr>
+          `;
+        }
+
+        renderComparisonChart(salesList);
+      }
+    }
+
+    function renderComparisonChart(salesList) {
+      const ctx = document.getElementById('chartSalesComparison');
+      if (!ctx) return;
+
+      const labels = salesList.map(s => s.name);
+      const dataValues = salesList.map(s => s.totalDays);
+      const backgroundColors = ['#3b82f6', '#cbd5e1', '#f59e0b', '#cbd5e1', '#f43f5e', '#cbd5e1', '#10b981'];
+
+      let leader = salesList[0] || { name: '-', totalDays: 0 };
+      salesList.forEach(s => {
+        if (s.totalDays > leader.totalDays) leader = s;
+      });
+      const leaderEl = document.getElementById('chartLeader');
+      if (leaderEl) {
+        leaderEl.innerText = leader.totalDays > 0 ? `Dẫn đầu: ${leader.name} (${leader.totalDays} ngày)` : 'Chưa có dữ liệu';
+      }
+
+      if (chartSalesComparisonInstance) chartSalesComparisonInstance.destroy();
+
+      chartSalesComparisonInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: dataValues,
+            backgroundColor: backgroundColors.slice(0, labels.length),
+            borderRadius: 6,
+            barThickness: 22
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 20, color: '#64748b', font: { size: 10 } },
+              grid: { color: '#f1f5f9' }
+            },
+            x: {
+              ticks: { color: '#64748b', font: { size: 10 }, maxRotation: 45, minRotation: 35 },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    function buildPaginationNav(totalItems, currentPage, pageSize, onPageChangeFnName) {
+      const totalPages = Math.ceil(totalItems / pageSize) || 1;
+      let html = '';
+
+      const prevDisabled = currentPage <= 1 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-blue-50 text-blue-600 hover:border-blue-300';
+      html += `<button onclick="${currentPage > 1 ? onPageChangeFnName + '(' + (currentPage - 1) + ')' : ''}" class="px-2.5 py-1 border border-slate-200 rounded-lg text-slate-600 font-medium transition ${prevDisabled}">
+                <i class="fa-solid fa-angle-left"></i>
+              </button>`;
+
+      let startPage = Math.max(1, currentPage - 2);
+      let endPage = Math.min(totalPages, startPage + 4);
+      if (endPage - startPage < 4) {
+        startPage = Math.max(1, endPage - 4);
+      }
+
+      if (startPage > 1) {
+        html += `<button onclick="${onPageChangeFnName}(1)" class="px-2.5 py-1 border border-slate-200 rounded-lg text-slate-600 font-medium hover:bg-blue-50 transition">1</button>`;
+        if (startPage > 2) html += `<span class="px-1.5 text-slate-400">...</span>`;
+      }
+
+      for (let p = startPage; p <= endPage; p++) {
+        if (p === currentPage) {
+          html += `<button class="px-3 py-1 bg-blue-600 text-white font-bold rounded-lg shadow-sm">${p}</button>`;
+        } else {
+          html += `<button onclick="${onPageChangeFnName}(${p})" class="px-2.5 py-1 border border-slate-200 rounded-lg text-slate-600 font-medium hover:bg-blue-50 transition">${p}</button>`;
+        }
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) html += `<span class="px-1.5 text-slate-400">...</span>`;
+        html += `<button onclick="${onPageChangeFnName}(${totalPages})" class="px-2.5 py-1 border border-slate-200 rounded-lg text-slate-600 font-medium hover:bg-blue-50 transition">${totalPages}</button>`;
+      }
+
+      const nextDisabled = currentPage >= totalPages ? 'opacity-40 cursor-not-allowed' : 'hover:bg-blue-50 text-blue-600 hover:border-blue-300';
+      html += `<button onclick="${currentPage < totalPages ? onPageChangeFnName + '(' + (currentPage + 1) + ')' : ''}" class="px-2.5 py-1 border border-slate-200 rounded-lg text-slate-600 font-medium transition ${nextDisabled}">
+                <i class="fa-solid fa-angle-right"></i>
+              </button>`;
+
+      return { html, totalPages };
+    }
+
+    // 1. RENDER NHẬT KÝ (LOGS) CÓ TÁCH CỘT NGÀY THĂM RIÊNG BIỆT
+    function changePageLogs(p) {
+      currentPageLogs = p;
+      renderLogsTable();
+    }
+
+    function renderLogsTable() {
+      const tbody = document.getElementById('logsTableBody');
+      if (!tbody) return;
+      const filterSaleEl = document.getElementById('filterSale');
+      let filterSale = filterSaleEl ? filterSaleEl.value : '';
+      const filterStatus = document.getElementById('filterStatus')?.value || '';
+
+      const logsStartVal = document.getElementById('filterLogsStartDate')?.value;
+      const logsEndVal = document.getElementById('filterLogsEndDate')?.value;
+      const logsStartTime = logsStartVal ? new Date(logsStartVal).getTime() : null;
+      const logsEndTime = logsEndVal ? new Date(logsEndVal).getTime() : null;
+
+      const userRole = currentUser && currentUser.role ? currentUser.role.toLowerCase().trim() : '';
+      const isPureSale = userRole === 'sale';
+
+      if (isPureSale) {
+        filterSale = currentUser.fullName; 
+        if (filterSaleEl) {
+          filterSaleEl.value = filterSale;
+          filterSaleEl.disabled = true; 
+        }
+      } else {
+        if (filterSaleEl) filterSaleEl.disabled = false;
+      }
+
+      tbody.innerHTML = '';
+      const filtered = logs.filter(l => {
+        if (l.startDate) {
+          const lTime = new Date(l.startDate).getTime();
+          if (logsStartTime && lTime < logsStartTime) return false;
+          if (logsEndTime && lTime > logsEndTime) return false;
+        }
+        return (!filterSale || l.sale === filterSale) && (!filterStatus || l.status === filterStatus);
+      });
+
+      const totalItems = filtered.length;
+      const totalPages = Math.ceil(totalItems / pageSizeLogs) || 1;
+      if (currentPageLogs > totalPages) currentPageLogs = totalPages;
+      if (currentPageLogs < 1) currentPageLogs = 1;
+
+      const startIndex = (currentPageLogs - 1) * pageSizeLogs;
+      const endIndex = Math.min(startIndex + pageSizeLogs, totalItems);
+      const pageData = filtered.slice(startIndex, endIndex);
+
+      if (pageData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="12" class="py-8 text-center text-slate-400 italic font-medium">Không có dữ liệu nhật ký demo trong khoảng thời gian này</td></tr>`;
+      } else {
+        pageData.forEach((l) => {
+          const dev = devices.find(d => String(d.sn).trim() === String(l.sn).trim()) || { name: 'Thiết bị', sn: l.sn };
+          const days = calculateLogDays(l) + ' ngày';
+          const isDemo = l.status === 'Đang demo';
+
+          // Tách mốc thời gian thăm [Thăm: ...] ra khỏi ghi chú để hiển thị cột riêng
+          let visitTimeDisplay = '-';
+          let cleanNotes = l.notes || '';
+          const matchTime = cleanNotes.match(/\[Thăm:\s*([^\]]+)\]/);
+          if (matchTime) {
+            visitTimeDisplay = matchTime[1];
+            cleanNotes = cleanNotes.replace(matchTime[0], '').trim();
+          }
+
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-50 transition border-b border-slate-100';
+          tr.innerHTML = `
+            <td class="py-3 px-4 font-bold text-slate-800">${l.code}</td>
+            <td class="py-3 px-4">
+              <div class="font-medium text-slate-800">${dev.model || dev.name}</div>
+              <div class="text-[11px] font-bold text-blue-600">SN: ${l.sn}</div>
+            </td>
+            <td class="py-3 px-4">
+              <div class="font-medium text-slate-800">${l.hospital}</div>
+              <div class="text-[11px] text-slate-500">${l.department || '-'}</div>
+            </td>
+            <td class="py-3 px-4 text-slate-700 font-medium">${l.sale}</td>
+            <td class="py-3 px-4 text-slate-600 font-medium">${l.startDate || '-'}</td>
+            <td class="py-3 px-4 text-slate-600 font-medium">${l.expectedDate || '-'}</td>
+            <td class="py-3 px-4 text-slate-600">${l.returnDate ? l.returnDate : '<span class="text-amber-600 italic font-medium">Chưa thu hồi</span>'}</td>
+            <td class="py-3 px-3 text-center font-bold text-blue-600">${days}</td>
+            <td class="py-3 px-3 text-center">
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-semibold inline-block ${isDemo ? 'badge-demo' : 'badge-warehouse'}">
+                ${l.status}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-blue-700 font-semibold text-[11px] whitespace-nowrap">
+              <i class="fa-solid fa-clock mr-1 text-slate-400"></i> ${visitTimeDisplay}
+            </td>
+            <td class="py-3 px-4 text-slate-700 text-xs whitespace-pre-line leading-relaxed min-w-[280px]">
+              ${cleanNotes}
+            </td>
+            <td class="py-3 px-4 text-center space-x-1.5 whitespace-nowrap">
+              <button onclick="cloneLog('${l.code}')" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 transition shadow-sm" title="Nhân bản (Tạo phiếu mới)">
+                <i class="fa-regular fa-copy text-xs"></i>
+              </button>
+              <button onclick="editLog('${l.code}')" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition shadow-sm" title="Sửa">
+                <i class="fa-regular fa-pen-to-square text-xs"></i>
+              </button>
+              <button onclick="deleteLog('${l.code}')" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-rose-50 text-rose-600 hover:bg-rose-100 hover:text-rose-700 transition shadow-sm" title="Xóa">
+                <i class="fa-regular fa-trash-can text-xs"></i>
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      const pageInfo = document.getElementById('pageInfoLogs');
+      if (pageInfo) {
+        pageInfo.innerHTML = totalItems > 0 
+          ? `Hiển thị <strong>${startIndex + 1} - ${endIndex}</strong> trên tổng số <strong>${totalItems}</strong> phiếu`
+          : `Tổng số <strong>0</strong> phiếu`;
+      }
+
+      const navContainer = document.getElementById('paginationNavLogs');
+      if (navContainer) {
+        const nav = buildPaginationNav(totalItems, currentPageLogs, pageSizeLogs, 'changePageLogs');
+        navContainer.innerHTML = nav.html;
+      }
+    }
+
+    // 2. RENDER THIẾT BỊ (DEVICES)
+    function changePageDevices(p) {
+      currentPageDevices = p;
+      renderDevicesTable();
+    }
+
+    function renderDevicesTable() {
+      const tbody = document.getElementById('devicesTableBody');
+      if (!tbody) return;
+      const searchKeyword = (document.getElementById('searchDeviceInput')?.value || '').toLowerCase().trim();
+      const statusFilter = document.getElementById('filterDeviceStatus')?.value || '';
+      
+      const hasPermission = canManageStaff();
+      tbody.innerHTML = '';
+
+      const filtered = devices.filter(dev => {
+        const activeLog = getActiveDemoLog(dev.sn);
+        const isDemo = !!activeLog;
+        const currentStatus = isDemo ? 'Đang demo' : 'Trong kho';
+
+        const matchesSearch = !searchKeyword || 
+          String(dev.sn).toLowerCase().includes(searchKeyword) ||
+          (dev.model || '').toLowerCase().includes(searchKeyword) ||
+          (dev.group || '').toLowerCase().includes(searchKeyword) ||
+          (activeLog && activeLog.hospital.toLowerCase().includes(searchKeyword));
+
+        const matchesStatus = !statusFilter || currentStatus === statusFilter;
+        return matchesSearch && matchesStatus;
+      });
+
+      const totalItems = filtered.length;
+      const totalPages = Math.ceil(totalItems / pageSizeDevices) || 1;
+      if (currentPageDevices > totalPages) currentPageDevices = totalPages;
+      if (currentPageDevices < 1) currentPageDevices = 1;
+
+      const startIndex = (currentPageDevices - 1) * pageSizeDevices;
+      const endIndex = Math.min(startIndex + pageSizeDevices, totalItems);
+      const pageData = filtered.slice(startIndex, endIndex);
+
+      if (pageData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-slate-400 italic font-medium">Không tìm thấy thiết bị nào</td></tr>`;
+      } else {
+        pageData.forEach((dev, idx) => {
+          const activeLog = getActiveDemoLog(dev.sn);
+          const isDemo = !!activeLog;
+          const location = isDemo ? activeLog.hospital : '<span class="italic text-slate-400">Kho Công Ty</span>';
+          const salePerson = isDemo ? activeLog.sale : '-';
+
+          let actionButtons = '';
+          if (hasPermission) {
+            actionButtons = `
+              <div class="flex items-center justify-center gap-1.5">
+                ${isDemo 
+                  ? `<button onclick="quickReturnDevice('${dev.sn}')" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-300 font-medium text-[11px] px-2 py-1 rounded flex items-center gap-1 shadow-sm transition" title="Thu hồi về kho">
+                       <i class="fa-solid fa-rotate-left"></i> Thu hồi
+                     </button>` 
+                  : `<button onclick="quickDispatchDevice('${dev.sn}')" class="bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-300 font-medium text-[11px] px-2 py-1 rounded flex items-center gap-1 shadow-sm transition" title="Giao demo">
+                       <i class="fa-regular fa-paper-plane"></i> Giao
+                     </button>`}
+                <button onclick="editDevice('${dev.sn}')" class="p-1.5 bg-slate-100 hover:bg-blue-50 text-blue-600 rounded transition" title="Chỉnh sửa thông tin thiết bị"><i class="fa-regular fa-pen-to-square"></i></button>
+                <button onclick="deleteDevice('${dev.sn}')" class="p-1.5 bg-slate-100 hover:bg-red-50 text-red-600 rounded transition" title="Xóa thiết bị"><i class="fa-regular fa-trash-can"></i></button>
+              </div>
+            `;
+          } else {
+            actionButtons = `<span class="text-slate-400 italic text-[11px]"><i class="fa-solid fa-lock text-[10px]"></i> Chỉ xem</span>`;
+          }
+
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-50/80 transition border-b border-slate-100 text-xs';
+          tr.innerHTML = `
+            <td class="py-3 px-3 text-center text-slate-400 font-medium">${startIndex + idx + 1}</td>
+            <td class="py-3 px-4 font-medium text-slate-800">${dev.group || 'Monitor'}</td>
+            <td class="py-3 px-4 font-bold text-slate-900">${dev.model || dev.name}</td>
+            <td class="py-3 px-4 font-bold text-blue-600">${dev.sn}</td>
+            <td class="py-3 px-4 font-medium ${isDemo ? 'text-blue-600' : ''}">${location}</td>
+            <td class="py-3 px-4 text-slate-700">${salePerson}</td>
+            <td class="py-3 px-4 text-center">
+              <span class="px-3 py-1 rounded-full text-[11px] font-semibold inline-flex items-center gap-1.5 ${isDemo ? 'badge-demo' : 'badge-warehouse'}">
+                ${isDemo ? '<i class="fa-solid fa-spinner fa-spin text-[10px]"></i> Đang demo' : '<i class="fa-solid fa-box-archive text-[10px]"></i> Trong kho'}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-center whitespace-nowrap">${actionButtons}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      const pageInfo = document.getElementById('pageInfoDevices');
+      if (pageInfo) {
+        pageInfo.innerHTML = totalItems > 0 
+          ? `Hiển thị <strong>${startIndex + 1} - ${endIndex}</strong> trên tổng số <strong>${totalItems}</strong> thiết bị`
+          : `Tổng số <strong>0</strong> thiết bị`;
+      }
+
+      const navContainer = document.getElementById('paginationNavDevices');
+      if (navContainer) {
+        const nav = buildPaginationNav(totalItems, currentPageDevices, pageSizeDevices, 'changePageDevices');
+        navContainer.innerHTML = nav.html;
+      }
+    }
+
+    function openModalDevice() {
+      if (!canManageStaff()) {
+        alert("Từ chối quyền: Chỉ tài khoản PS/App/KS hoặc Admin mới được phép thêm thiết bị!");
+        return;
+      }
+      document.getElementById('formDevice').reset();
+      document.getElementById('deviceEditSn').value = '';
+      document.getElementById('deviceSnInput').readOnly = false;
+      document.getElementById('modalDeviceTitle').innerHTML = '<i class="fa-solid fa-boxes-stacked text-blue-400"></i> Thêm Thiết Bị Mới';
+      document.getElementById('modalDevice').classList.remove('hidden');
+    }
+
+    function editDevice(sn) {
+      if (!canManageStaff()) {
+        alert("Từ chối quyền: Chỉ tài khoản PS/App/KS hoặc Admin mới được phép chỉnh sửa thiết bị!");
+        return;
+      }
+      const dev = devices.find(d => String(d.sn) === String(sn));
+      if (!dev) return;
+
+      document.getElementById('deviceEditSn').value = dev.sn;
+
+      const snInput = document.getElementById('deviceSnInput');
+      snInput.value = dev.sn;
+      snInput.readOnly = false;
+      snInput.disabled = false;
+
+      const groupInput = document.getElementById('deviceGroupInput');
+      groupInput.value = dev.group || '';
+      groupInput.readOnly = false;
+      groupInput.disabled = false;
+
+      const modelInput = document.getElementById('deviceModelInput');
+      modelInput.value = dev.model || dev.name || '';
+      modelInput.readOnly = false;
+      modelInput.disabled = false;
+
+      document.getElementById('modalDeviceTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-blue-400"></i> Cập Nhật Thiết Bị: ' + dev.sn;
+      document.getElementById('modalDevice').classList.remove('hidden');
+    }
+
+    function closeModalDevice() {
+      document.getElementById('modalDevice').classList.add('hidden');
+    }
+
+    async function saveDevice(e) {
+      e.preventDefault();
+      if (!canManageStaff()) {
+        alert("Từ chối quyền lưu dữ liệu!");
+        return;
+      }
+
+      const editSn = document.getElementById('deviceEditSn').value;
+      const group = document.getElementById('deviceGroupInput').value.trim();
+      const model = document.getElementById('deviceModelInput').value.trim();
+      const sn = document.getElementById('deviceSnInput').value.trim();
+
+      let newDev = { sn, group, model, name: `${group} - ${model}` };
+
+      if (editSn) {
+        const idx = devices.findIndex(d => String(d.sn) === String(editSn));
+        if (idx !== -1) devices[idx] = newDev;
+      } else {
+        if (devices.some(d => String(d.sn) === String(sn))) {
+          alert('Số SN này đã tồn tại trong danh mục!');
+          return;
+        }
+        devices.push(newDev);
+      }
+
+      closeModalDevice();
+      renderAll();
+      await pushDataToPowerAutomate({ devices: [newDev] });
+    }
+
+    async function deleteDevice(sn) {
+      if (!canManageStaff()) {
+        alert("Từ chối quyền: Chỉ tài khoản PS/App/KS hoặc Admin mới được phép xóa thiết bị!");
+        return;
+      }
+      if (confirm(`Bạn có chắc chắn muốn xóa thiết bị SN: ${sn}?`)) {
+        const devToDelete = devices.find(d => String(d.sn) === String(sn));
+        devices = devices.filter(d => String(d.sn) !== String(sn));
+        renderAll();
+        if (devToDelete) {
+            devToDelete.group = 'DELETED'; 
+            await pushDataToPowerAutomate({ devices: [devToDelete] });
+        }
+      }
+    }
+
+    // 3. RENDER KHÁCH HÀNG (CUSTOMERS)
+    function countActiveDemosForCustomer(hospitalName) {
+      if (!hospitalName) return 0;
+      const cleanHosp = hospitalName.replace(/\s*\(\s*\)/g, '').toLowerCase().trim();
+      const snSet = new Set();
+      logs.forEach(l => {
+        if (l.status === 'Đang demo' && l.hospital && l.sn) {
+          const logHosp = l.hospital.replace(/\s*\(\s*\)/g, '').toLowerCase().trim();
+          if (logHosp === cleanHosp || logHosp.includes(cleanHosp) || cleanHosp.includes(logHosp)) {
+            snSet.add(l.sn);
+          }
+        }
+      });
+      return snSet.size;
+    }
+
+    function changePageCustomers(p) {
+      currentPageCustomers = p;
+      renderCustomersTable();
+    }
+
+    function renderCustomersTable() {
+      const tbody = document.getElementById('customersTableBody');
+      if (!tbody) return;
+      const search = (document.getElementById('searchCustomerInput')?.value || '').toLowerCase().trim();
+      const hasPermission = canManageStaff();
+
+      tbody.innerHTML = '';
+
+      const filtered = customers.filter(cust => {
+        return !search || 
+          cust.hospital.toLowerCase().includes(search) || 
+          (cust.code || '').toLowerCase().includes(search) || 
+          (cust.city || '').toLowerCase().includes(search);
+      });
+
+      const totalItems = filtered.length;
+      const totalPages = Math.ceil(totalItems / pageSizeCustomers) || 1;
+      if (currentPageCustomers > totalPages) currentPageCustomers = totalPages;
+      if (currentPageCustomers < 1) currentPageCustomers = 1;
+
+      const startIndex = (currentPageCustomers - 1) * pageSizeCustomers;
+      const endIndex = Math.min(startIndex + pageSizeCustomers, totalItems);
+      const pageData = filtered.slice(startIndex, endIndex);
+
+      if (pageData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-slate-400 italic font-medium">Không tìm thấy khách hàng nào</td></tr>`;
+      } else {
+        pageData.forEach((cust, idx) => {
+          const activeCount = countActiveDemosForCustomer(cust.hospital);
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-50/80 transition border-b border-slate-100 text-xs';
+          tr.innerHTML = `
+            <td class="py-3 px-3 text-center text-slate-400 font-medium">${startIndex + idx + 1}</td>
+            <td class="py-3 px-4 font-bold text-slate-800 tracking-wide">${cust.code || 'KH-' + String(startIndex + idx + 1).padStart(3, '0')}</td>
+            <td class="py-3 px-4 font-bold text-slate-900">${cust.hospital}</td>
+            <td class="py-3 px-4 text-slate-600 font-medium">${cust.city || '-'}</td>
+            <td class="py-3 px-4 text-slate-500">${cust.department || '-'}</td>
+            <td class="py-3 px-4 text-center font-bold">
+              ${activeCount > 0 
+                ? `<span class="bg-[#fef3c7] text-[#b45309] px-2.5 py-1 rounded-md text-[11px] font-semibold">${activeCount} máy</span>` 
+                : `<span class="text-slate-400 font-normal">0</span>`}
+            </td>
+            <td class="py-3 px-4 text-center whitespace-nowrap">
+              ${hasPermission ? `
+                <div class="flex items-center justify-center gap-2">
+                  <button onclick="editCustomer('${cust.code}')" class="border border-blue-400 hover:bg-blue-50 text-blue-600 font-medium text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm transition">
+                    <i class="fa-regular fa-pen-to-square"></i> Sửa
+                  </button>
+                  <button onclick="deleteCustomer('${cust.code}')" class="border border-red-300 hover:bg-red-50 text-red-600 font-medium text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm transition">
+                    <i class="fa-regular fa-trash-can"></i> Xóa
+                  </button>
+                </div>
+              ` : `
+                <span class="text-slate-400 italic text-[11px]"><i class="fa-solid fa-lock text-[10px]"></i> Chỉ xem</span>
+              `}
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      const pageInfo = document.getElementById('pageInfoCustomers');
+      if (pageInfo) {
+        pageInfo.innerHTML = totalItems > 0 
+          ? `Hiển thị <strong>${startIndex + 1} - ${endIndex}</strong> trên tổng số <strong>${totalItems}</strong> khách hàng`
+          : `Tổng số <strong>0</strong> khách hàng`;
+      }
+
+      const navContainer = document.getElementById('paginationNavCustomers');
+      if (navContainer) {
+        const nav = buildPaginationNav(totalItems, currentPageCustomers, pageSizeCustomers, 'changePageCustomers');
+        navContainer.innerHTML = nav.html;
+      }
+    }
+
+    function openModalCustomer() {
+      if (!canManageStaff()) {
+        alert("Từ chối quyền: Chỉ tài khoản PS/App/KS hoặc Admin mới được phép thêm khách hàng!");
+        return;
+      }
+      document.getElementById('formCustomer').reset();
+      document.getElementById('customerEditCode').value = '';
+      document.getElementById('custCodeInput').readOnly = false;
+      const nextNum = customers.length + 1;
+      document.getElementById('custCodeInput').value = 'KH-' + String(nextNum).padStart(3, '0');
+      document.getElementById('modalCustomerTitle').innerHTML = '<i class="fa-solid fa-hospital-user text-blue-400"></i> Thêm Khách Hàng Mới';
+      document.getElementById('modalCustomer').classList.remove('hidden');
+    }
+
+    function editCustomer(code) {
+      if (!canManageStaff()) {
+        alert("Từ chối quyền: Chỉ tài khoản PS/App/KS hoặc Admin mới được phép chỉnh sửa khách hàng!");
+        return;
+      }
+      const cust = customers.find(c => c.code === code);
+      if (!cust) return;
+
+      document.getElementById('customerEditCode').value = cust.code;
+      document.getElementById('custCodeInput').value = cust.code;
+      document.getElementById('custCodeInput').readOnly = true;
+      document.getElementById('custHospitalInput').value = cust.hospital;
+      document.getElementById('custCityInput').value = cust.city || '';
+      document.getElementById('custDeptInput').value = cust.department || '';
+
+      document.getElementById('modalCustomerTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-blue-400"></i> Cập Nhật Khách Hàng: ' + cust.code;
+      document.getElementById('modalCustomer').classList.remove('hidden');
+    }
+
+    function closeModalCustomer() {
+      document.getElementById('modalCustomer').classList.add('hidden');
+    }
+
+    async function saveCustomer(e) {
+      e.preventDefault();
+      if (!canManageStaff()) {
+        alert("Từ chối quyền lưu dữ liệu!");
+        return;
+      }
+
+      const editCode = document.getElementById('customerEditCode').value;
+      const code = document.getElementById('custCodeInput').value.trim();
+      const hospital = document.getElementById('custHospitalInput').value.trim();
+      const city = document.getElementById('custCityInput').value.trim();
+      const department = document.getElementById('custDeptInput').value.trim() || '-';
+
+      let newCust = { code, hospital, city, department };
+
+      if (editCode) {
+        const idx = customers.findIndex(c => c.code === editCode);
+        if (idx !== -1) customers[idx] = newCust;
+      } else {
+        if (customers.some(c => c.code === code)) {
+          alert("Mã khách hàng này đã tồn tại!");
+          return;
+        }
+        customers.push(newCust);
+      }
+
+      closeModalCustomer();
+      renderAll();
+      await pushDataToPowerAutomate({ customers: [newCust] });
+    }
+
+    async function deleteCustomer(code) {
+      if (!canManageStaff()) {
+        alert("Từ chối quyền: Chỉ tài khoản PS/App/KS hoặc Admin mới được phép xóa khách hàng!");
+        return;
+      }
+      if (confirm(`Bạn có chắc chắn muốn xóa khách hàng [${code}]?`)) {
+        const custToDelete = customers.find(c => c.code === code);
+        customers = customers.filter(c => c.code !== code);
+        renderAll();
+        if (custToDelete) {
+            custToDelete.city = 'DELETED';
+            await pushDataToPowerAutomate({ customers: [custToDelete] });
+        }
+      }
+    }
+
+    function renderSalesTable() {
+      const tbody = document.getElementById('salesTableBody');
+      if (!tbody) return;
+      const isAdmin = currentUser && currentUser.role === 'admin';
+
+      tbody.innerHTML = '';
+      let counter = 1;
+
+      sales.forEach(s => {
+        const heldSNs = new Set();
+        let totalVisits = 0;
+
+        logs.forEach(l => {
+          if (l.sale === s.name) {
+            totalVisits++;
+            if (l.status === 'Đang demo' && l.sn) {
+              heldSNs.add(l.sn);
+            }
+          }
+        });
+
+        const heldCount = heldSNs.size;
+        const hasMachines = heldCount > 0;
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50/80 transition border-b border-slate-100 text-xs';
+        tr.innerHTML = `
+          <td class="py-3 px-3 text-center text-slate-400 font-medium">${counter++}</td>
+          <td class="py-3 px-4 font-bold text-slate-800 tracking-wide">${s.code || 'Sale ' + (counter - 1)}</td>
+          <td class="py-3 px-4 font-bold text-slate-900">${s.name}</td>
+          <td class="py-3 px-4 text-slate-500">${s.region || '-'}</td>
+          <td class="py-3 px-4 text-center font-bold">
+            ${hasMachines 
+              ? `<span class="text-[#b45309] font-bold text-[11px]">${heldCount} máy (SN)</span>` 
+              : `<span class="text-slate-400 font-normal">0 máy (SN)</span>`}
+          </td>
+          <td class="py-3 px-4 text-center font-medium text-slate-700">${totalVisits} lần</td>
+          <td class="py-3 px-4 text-center whitespace-nowrap">
+            ${isAdmin ? `
+              <div class="flex items-center justify-center gap-2">
+                <button onclick="editSale('${s.code}')" class="border border-blue-400 hover:bg-blue-50 text-blue-600 font-medium text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm transition">
+                  <i class="fa-regular fa-pen-to-square"></i> Sửa
+                </button>
+                <button onclick="deleteSale('${s.code}')" class="border border-red-300 hover:bg-red-50 text-red-600 font-medium text-[11px] px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm transition">
+                  <i class="fa-regular fa-trash-can"></i> Xóa
+                </button>
+              </div>
+            ` : `
+              <span class="text-slate-400 italic text-[11px]"><i class="fa-solid fa-lock text-[10px]"></i> Chỉ xem</span>
+            `}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openModalSale() {
+      if (!currentUser || currentUser.role !== 'admin') {
+        alert("Từ chối quyền: Chỉ tài khoản Admin mới được phép thêm nhân viên sale!");
+        return;
+      }
+      document.getElementById('formSale').reset();
+      document.getElementById('saleEditCode').value = '';
+      document.getElementById('saleCodeInput').readOnly = false;
+      const nextNum = sales.length + 1;
+      document.getElementById('saleCodeInput').value = 'Sale ' + nextNum;
+      document.getElementById('modalSaleTitle').innerHTML = '<i class="fa-solid fa-user-plus text-blue-400"></i> Thêm Nhân Viên Sale Mới';
+      document.getElementById('modalSale').classList.remove('hidden');
+    }
+
+    function editSale(code) {
+      if (!currentUser || currentUser.role !== 'admin') {
+        alert("Từ chối quyền: Chỉ tài khoản Admin mới được phép chỉnh sửa nhân viên sale!");
+        return;
+      }
+      const s = sales.find(item => item.code === code);
+      if (!s) return;
+
+      document.getElementById('saleEditCode').value = s.code;
+      document.getElementById('saleCodeInput').value = s.code;
+      document.getElementById('saleCodeInput').readOnly = true;
+      document.getElementById('saleNameInput').value = s.name;
+      document.getElementById('saleRegionInput').value = s.region || '';
+
+      document.getElementById('modalSaleTitle').innerHTML = '<i class="fa-solid fa-pen-to-square text-blue-400"></i> Cập Nhật: ' + s.code;
+      document.getElementById('modalSale').classList.remove('hidden');
+    }
+
+    function closeModalSale() {
+      document.getElementById('modalSale').classList.add('hidden');
+    }
+
+    async function saveSale(e) {
+      e.preventDefault();
+      if (!currentUser || currentUser.role !== 'admin') {
+        alert("Lỗi bảo mật: Chỉ tài khoản Admin mới có quyền thực hiện thao tác này!");
+        return;
+      }
+
+      const editCode = document.getElementById('saleEditCode').value;
+      const code = document.getElementById('saleCodeInput').value.trim();
+      const name = document.getElementById('saleNameInput').value.trim();
+      const region = document.getElementById('saleRegionInput').value.trim() || '-';
+
+      let newSale = { code, name, region };
+
+      if (editCode) {
+        const idx = sales.findIndex(s => s.code === editCode);
+        if (idx !== -1) {
+          const oldName = sales[idx].name;
+          sales[idx] = newSale;
+          logs.forEach(l => {
+            if (l.sale === oldName) l.sale = name;
+          });
+        }
+      } else {
+        if (sales.some(s => s.code === code)) {
+          alert("Mã sale này đã tồn tại!");
+          return;
+        }
+        sales.push(newSale);
+      }
+
+      closeModalSale();
+      renderAll();
+      await pushDataToPowerAutomate({ sales: [newSale] });
+    }
+
+    async function deleteSale(code) {
+      if (!currentUser || currentUser.role !== 'admin') {
+        alert("Từ chối quyền: Chỉ tài khoản Admin mới được phép xóa nhân viên sale!");
+        return;
+      }
+      if (confirm(`Bạn có chắc chắn muốn xóa mã Sale [${code}]?`)) {
+        const sToDelete = sales.find(item => item.code === code);
+        sales = sales.filter(item => item.code !== code);
+        renderAll();
+        if (sToDelete) {
+            sToDelete.region = 'DELETED';
+            await pushDataToPowerAutomate({ sales: [sToDelete] });
+        }
+      }
+    }
+
+    function renderAll() {
+      renderDashboardSummary();
+      renderLogsTable();
+      renderDevicesTable();
+      renderCustomersTable();
+      renderSalesTable();
+
+      const fSale = document.getElementById('filterSale');
+      if (fSale) {
+        fSale.innerHTML = '<option value="">Tất cả Sale</option>';
+        sales.forEach(s => { fSale.innerHTML += `<option value="${s.name}">${s.name}</option>`; });
+      }
+    }
+
+    async function pushDataToPowerAutomate(deltaPayload = {}) {
+      const statusEl = document.getElementById('syncStatus');
+      if (statusEl) {
+        statusEl.className = 'font-medium text-blue-700 flex items-center gap-1.5 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200';
+        statusEl.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...';
+      }
+
+      try {
+        const payloadLogs = (deltaPayload.logs || []).map(l => ({
+          ...l,
+          'Mã Phiếu': l.code,
+          'Số SN': l.sn,
+          'Bệnh Viện': l.hospital,
+          'Khoa Phòng': l.department || '-',
+          'Sale Phụ Trách': l.sale,
+          'Ngày Bắt Đầu': l.startDate,
+          'Dự Kiến Trả': l.expectedDate,
+          'Ngày Thu Hồi': l.returnDate || '',
+          'Trạng Thái': l.status,
+          'Ghi Chú': l.notes || ''
+        }));
+
+        const payloadDevices = (deltaPayload.devices || []).map(d => ({
+          ...d,
+          'SN': d.sn,
+          'Nhóm Thiết bị': d.group,
+          'Tên Thiết Bị': d.name || (d.group + ' - ' + d.model)
+        }));
+
+        const payloadCustomers = (deltaPayload.customers || []).map(c => ({
+          ...c,
+          'Mã KH': c.code,
+          'Tên Bệnh Viện': c.hospital,
+          'Tỉnh / Thành Phố': c.city || '-',
+          'Khoa Phòng': c.department || '-'
+        }));
+
+        const payloadSales = (deltaPayload.sales || []).map(s => ({
+          ...s,
+          'Mã Sale': s.code,
+          'Họ Tên': s.name,
+          'Khu Vực': s.region || '-'
+        }));
+
+        const payload = { 
+          action: 'syncAllData', 
+          sales: payloadSales,
+          devices: payloadDevices, 
+          customers: payloadCustomers, 
+          logs: payloadLogs, 
+          users: [] 
+        };
+
+        const res = await fetch(POWER_AUTOMATE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          if (statusEl) {
+            statusEl.className = 'font-medium text-emerald-700 flex items-center gap-1.5 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200';
+            statusEl.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i> Đã lưu thành công';
+          }
+          setTimeout(() => { 
+            if (statusEl) statusEl.innerHTML = '<i class="fa-solid fa-check text-emerald-600"></i> Đã đồng bộ'; 
+          }, 3000);
+        }
+      } catch(err) {
+        console.error(err);
+        if (statusEl) {
+          statusEl.className = 'font-medium text-red-700 flex items-center gap-1.5 bg-red-50 px-2.5 py-1 rounded-md border border-red-200';
+          statusEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Lỗi ghi dữ liệu';
+        }
+      }
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('nav button').forEach(el => {
+        el.classList.remove('border-blue-600', 'text-blue-600');
+        el.classList.add('border-transparent', 'text-slate-500');
+      });
+
+      document.getElementById(tabId).classList.remove('hidden');
+      const btn = document.getElementById('btn-' + tabId);
+      if (btn) {
+        btn.classList.add('border-blue-600', 'text-blue-600');
+        btn.classList.remove('border-transparent', 'text-slate-500');
+      }
+
+      if (tabId === 'tab-dashboard') renderDashboardSummary();
+      if (tabId === 'tab-logs') { currentPageLogs = 1; renderLogsTable(); }
+      if (tabId === 'tab-devices') { currentPageDevices = 1; renderDevicesTable(); }
+      if (tabId === 'tab-customers') { currentPageCustomers = 1; renderCustomersTable(); }
+      if (tabId === 'tab-sales-users') renderSalesTable();
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      const currentYear = new Date().getFullYear();
+      
+      const startDateInput = document.getElementById('filterStartDate');
+      const endDateInput = document.getElementById('filterEndDate');
+      if (startDateInput && !startDateInput.value) startDateInput.value = `${currentYear}-01-01`;
+      if (endDateInput && !endDateInput.value) endDateInput.value = `${currentYear}-12-31`;
+
+      const logsStartInput = document.getElementById('filterLogsStartDate');
+      const logsEndInput = document.getElementById('filterLogsEndDate');
+      if (logsStartInput && !logsStartInput.value) logsStartInput.value = `${currentYear}-01-01`;
+      if (logsEndInput && !logsEndInput.value) logsEndInput.value = `${currentYear}-12-31`;
+      
+      const label = document.getElementById('btnDefaultYearLabel');
+      if (label) label.innerText = `Năm ${currentYear}`;
+
+      const logsLabel = document.getElementById('btnLogsDefaultYearLabel');
+      if (logsLabel) logsLabel.innerText = `Năm ${currentYear}`;
+
+      const savedUser = localStorage.getItem('nipon_meddemo_user');
+      if (savedUser) {
+        currentUser = JSON.parse(savedUser);
+        document.getElementById('loginScreen').classList.add('hidden');
+        applyUserSession();
+        fetchAllDataFromPowerAutomate(true);
+      } else {
+        document.getElementById('loginScreen').classList.remove('hidden');
+        fetchAllDataFromPowerAutomate(false);
+      }
+    });
+  </script>
+</body>
+</html>
