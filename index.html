@@ -1357,6 +1357,7 @@
         expectedDate: document.getElementById('logExpectedDate').value,
         status: document.getElementById('logStatus').value,
         returnDate: document.getElementById('logReturnDate').value || '',
+        visitTime: document.getElementById('logVisitDateTime').value ? document.getElementById('logVisitDateTime').value.replace('T', ' ') : '',
         notes: rawNotes
       };
 
@@ -2297,6 +2298,7 @@
           'Bệnh Viện': l.hospital,
           'Khoa Phòng': l.department || '-',
           'Sale Phụ Trách': l.sale,
+          'Ngày Thăm': l.visitTime || '',
           'Ngày Bắt Đầu': l.startDate,
           'Dự Kiến Trả': l.expectedDate,
           'Ngày Thu Hồi': l.returnDate || '',
