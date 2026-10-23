@@ -532,7 +532,16 @@
             <input type="date" id="logReturnDate" class="w-full border border-slate-300 rounded-lg px-3 py-2 bg-white text-slate-800 focus:ring-1 focus:ring-blue-500 focus:outline-none">
           </div>
         </div>
-
+<!-- Ô CHỌN NGÀY GIỜ THĂM KHÁCH HÀNG -->
+      <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+        <div class="flex items-center justify-between mb-1.5">
+          <label class="block font-bold text-blue-700 uppercase text-[11px] flex items-center gap-1.5">
+            <i class="fa-solid fa-calendar-days"></i> NGÀY THĂM KHÁCH HÀNG *
+          </label>
+          <span class="text-[11px] text-slate-500 italic">Mặc định lấy thời gian thực tế hiện tại</span>
+        </div>
+        <input type="datetime-local" id="logVisitDateTime" required class="w-full border border-slate-300 rounded-lg px-3 py-2 bg-white text-slate-800 font-semibold focus:ring-1 focus:ring-blue-500 focus:outline-none">
+      </div>
         <div>
           <div class="flex justify-between items-center mb-1.5">
             <label class="block font-bold text-slate-600 uppercase text-[11px]">
@@ -1244,6 +1253,14 @@
       document.getElementById('modalLogTitle').innerText = 'Tạo Phiếu Demo / Lần Thăm Mới';
 
       populateModalDropdowns();
+      // Lấy thời gian thực tế hiện tại gán vào ô Ngày Giờ Lần Thăm
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('logVisitDateTime').value = `${year}-${month}-${day}T${hours}:${minutes}`;
 
       const today = new Date();
       const nextMonth = new Date();
@@ -1306,6 +1323,11 @@
       e.preventDefault();
       const editId = document.getElementById('logEditId').value;
       const prefix = getCurrentUserPrefix();
+      // 1. Lấy giá trị từ ô chọn ngày thăm mới thêm vào modal
+      const visitTime = document.getElementById('logVisitDateTime').value;
+      const formattedVisitTime = visitTime ? visitTime.replace('T', ' ') : new Date().toISOString().slice(0, 19).replace('T', ' ');
+      const timeTag = `[Thăm: ${formattedVisitTime}]`;
+      
       let rawNotes = document.getElementById('logNotes').value.trim();
 
       if (rawNotes && !rawNotes.startsWith(prefix) && !rawNotes.includes(':')) {
