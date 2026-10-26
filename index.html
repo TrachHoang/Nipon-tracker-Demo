@@ -138,7 +138,6 @@
   <main class="max-w-[1550px] mx-auto px-5 py-5">
     <!-- TAB 1: BÁO CÁO TỔNG HỢP & SALES -->
     <div id="tab-dashboard" class="tab-content block">
-      <!-- BỘ LỌC KHOẢNG THỜI GIAN BÁO CÁO -->
       <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-5 flex flex-wrap items-center justify-between gap-4">
         <div>
           <h2 class="text-base font-bold text-slate-900">Bộ Lọc Thời Gian Báo Cáo</h2>
@@ -209,7 +208,7 @@
         <div class="lg:col-span-8 bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
           <div class="mb-4">
             <h3 class="text-base font-bold text-slate-900">Tổng Hợp Thời Gian Demo & Số Máy Theo Từng Sale</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Số máy đang giữ tính theo Số SN duy nhất (không bị nhân đôi khi thêm lần thăm)</p>
+            <p class="text-xs text-slate-500 mt-0.5">Số máy đang giữ tính theo Số SN duy nhất</p>
           </div>
 
           <div class="overflow-x-auto">
@@ -246,7 +245,7 @@
       </div>
     </div>
 
-    <!-- TAB 2: NHẬT KÝ DEMO & LẦN THĂM (CÓ PHÂN TRANG & BỘ LỌC KHOẢNG THỜI GIAN) -->
+    <!-- TAB 2: NHẬT KÝ DEMO & LẦN THĂM -->
     <div id="tab-logs" class="tab-content hidden">
       <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-4 flex flex-wrap justify-between items-center gap-4">
         <div>
@@ -315,7 +314,7 @@
       </div>
     </div>
 
-    <!-- TAB 3: DANH MỤC THIẾT BỊ (CÓ PHÂN TRANG) -->
+    <!-- TAB 3: DANH MỤC THIẾT BỊ -->
     <div id="tab-devices" class="tab-content hidden">
       <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-4 flex flex-wrap justify-between items-center gap-4">
         <div>
@@ -373,7 +372,7 @@
       </div>
     </div>
 
-    <!-- TAB 4: DANH SÁCH KHÁCH HÀNG (CÓ PHÂN TRANG) -->
+    <!-- TAB 4: DANH SÁCH KHÁCH HÀNG -->
     <div id="tab-customers" class="tab-content hidden">
       <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm mb-4 flex flex-wrap justify-between items-center gap-4">
         <div>
@@ -556,7 +555,7 @@
             </div>
           </div>
           <textarea id="logNotes" rows="3" placeholder="Ghi nhận phản hồi của Bác sĩ sau lần thăm này, tình trạng máy, hỗ trợ kỹ thuật..." class="w-full border border-slate-300 rounded-lg p-3 text-slate-800 focus:ring-1 focus:ring-blue-500 focus:outline-none"></textarea>
-          <p class="text-[11px] text-slate-400 italic mt-1">* Hệ thống sẽ tự động ghi nhận thời gian thăm ra một cột riêng biệt.</p>
+          <p class="text-[11px] text-slate-400 italic mt-1">* Thời gian thăm được lưu độc lập ra cột riêng biệt.</p>
         </div>
 
         <div class="flex justify-end items-center gap-3 pt-4 border-t border-slate-200">
@@ -964,6 +963,8 @@
             const department = extractField(l, ['khoaphongban', 'khoaphong', 'department'], vals[3] || '-');
             const sale = extractField(l, ['salephutrach', 'sale', 'nhanvien'], vals[4] || '');
             
+            // Lấy trực tiếp từ cột Ngày Thăm (Cột F) trong Excel
+            let visitTime = formatExcelDate(extractField(l, ['ngaytham', 'visitTime', 'thoigiantham']));
             let startDate = formatExcelDate(extractField(l, ['ngaybatdaudemo', 'ngaybatdau', 'startdate']));
             let expectedDate = formatExcelDate(extractField(l, ['dukientra', 'expecteddate']));
             let returnDate = formatExcelDate(extractField(l, ['ngaythuhoi', 'returndate']));
@@ -975,7 +976,7 @@
             if (status === 'DELETED') {
               logMap.delete(key);
             } else {
-              logMap.set(key, { code: code.trim(), sn, hospital, department, sale, startDate, expectedDate, returnDate, status, notes });
+              logMap.set(key, { code: code.trim(), sn, hospital, department, sale, visitTime, startDate, expectedDate, returnDate, status, notes });
             }
           });
           logs = Array.from(logMap.values());
@@ -1064,7 +1065,7 @@
       if (confirm("Bạn có chắc chắn muốn đăng xuất khỏi hệ thống NIPON?")) {
         localStorage.removeItem('nipon_meddemo_user');
         currentUser = null;
-        document.getElementById('loginScreen').classList.add('hidden');
+        document.getElementById('loginScreen').classList.remove('hidden');
         document.getElementById('formLogin').reset();
         document.getElementById('loginError').classList.add('hidden');
       }
@@ -1312,13 +1313,17 @@
       document.getElementById('logReturnDate').value = log.returnDate || '';
       document.getElementById('logNotes').value = log.notes || '';
 
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const day = String(now.getDate()).padStart(2, '0');
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      document.getElementById('logVisitDateTime').value = `${year}-${month}-${day}T${hours}:${minutes}`;
+      if (log.visitTime) {
+        document.getElementById('logVisitDateTime').value = log.visitTime.replace(' ', 'T');
+      } else {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        document.getElementById('logVisitDateTime').value = `${year}-${month}-${day}T${hours}:${minutes}`;
+      }
 
       toggleReturnDateInput();
       document.getElementById('modalLogTitle').innerText = 'Cập Nhật Phiếu: ' + log.code;
@@ -1333,18 +1338,13 @@
       e.preventDefault();
       const editId = document.getElementById('logEditId').value;
       const prefix = getCurrentUserPrefix();
-      const visitTime = document.getElementById('logVisitDateTime').value;
+      const visitTimeVal = document.getElementById('logVisitDateTime').value;
+      const formattedVisitTime = visitTimeVal ? visitTimeVal.replace('T', ' ') : '';
+
       let rawNotes = document.getElementById('logNotes').value.trim();
 
-      const formattedVisitTime = visitTime ? visitTime.replace('T', ' ') : new Date().toISOString().slice(0, 19).replace('T', ' ');
-      const timeTag = `[Thăm: ${formattedVisitTime}]`;
-
-      if (rawNotes) {
-        if (!rawNotes.includes('[Thăm:')) {
-          rawNotes = `${prefix} ${timeTag} ${rawNotes}`;
-        }
-      } else {
-        rawNotes = `${prefix} ${timeTag} Cập nhật lần thăm khách hàng.`;
+      if (rawNotes && !rawNotes.startsWith(prefix) && !rawNotes.includes(':')) {
+        rawNotes = prefix + rawNotes;
       }
 
       const newLog = {
@@ -1357,7 +1357,7 @@
         expectedDate: document.getElementById('logExpectedDate').value,
         status: document.getElementById('logStatus').value,
         returnDate: document.getElementById('logReturnDate').value || '',
-        visitTime: document.getElementById('logVisitDateTime').value ? document.getElementById('logVisitDateTime').value.replace('T', ' ') : '',
+        visitTime: formattedVisitTime,
         notes: rawNotes
       };
 
@@ -1628,7 +1628,7 @@
       return { html, totalPages };
     }
 
-    // 1. RENDER NHẬT KÝ (LOGS) CÓ TÁCH CỘT NGÀY THĂM RIÊNG BIỆT
+    // 1. RENDER NHẬT KÝ (LOGS) DÙNG TRỰC TIẾP TRƯỜNG visitTime
     function changePageLogs(p) {
       currentPageLogs = p;
       renderLogsTable();
@@ -1686,14 +1686,8 @@
           const days = calculateLogDays(l) + ' ngày';
           const isDemo = l.status === 'Đang demo';
 
-          // Tách mốc thời gian thăm [Thăm: ...] ra khỏi ghi chú để hiển thị cột riêng
-          let visitTimeDisplay = '-';
-          let cleanNotes = l.notes || '';
-          const matchTime = cleanNotes.match(/\[Thăm:\s*([^\]]+)\]/);
-          if (matchTime) {
-            visitTimeDisplay = matchTime[1];
-            cleanNotes = cleanNotes.replace(matchTime[0], '').trim();
-          }
+          // Hiển thị trực tiếp trường visitTime độc lập
+          const visitTimeDisplay = l.visitTime ? l.visitTime : '-';
 
           const tr = document.createElement('tr');
           tr.className = 'hover:bg-slate-50 transition border-b border-slate-100';
@@ -1721,7 +1715,7 @@
               <i class="fa-solid fa-clock mr-1 text-slate-400"></i> ${visitTimeDisplay}
             </td>
             <td class="py-3 px-4 text-slate-700 text-xs whitespace-pre-line leading-relaxed min-w-[280px]">
-              ${cleanNotes}
+              ${l.notes || ''}
             </td>
             <td class="py-3 px-4 text-center space-x-1.5 whitespace-nowrap">
               <button onclick="cloneLog('${l.code}')" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 transition shadow-sm" title="Nhân bản (Tạo phiếu mới)">
