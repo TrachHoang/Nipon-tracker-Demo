@@ -728,17 +728,25 @@
     let currentPageCustomers = 1;
     let pageSizeCustomers = 10;
 
-    function formatExcelDate(rawDate) {
+function formatExcelDate(rawDate) {
       if (!rawDate || rawDate === '-' || rawDate === 'Chưa thu hồi') return '';
       const strVal = String(rawDate).trim();
       
-      if (/^\d{5}$/.test(strVal)) {
-        const serial = parseInt(strVal, 10);
+      // Xử lý nếu Excel trả về dạng số Serial (có cả phần thập phân giờ phút)
+      if (/^\d+(\.\d+)?$/.test(strVal) && !strVal.includes('-') && !strVal.includes('/')) {
+        const serial = parseFloat(strVal);
         const utcDays = serial - 25569;
         const date = new Date(utcDays * 86400 * 1000);
         const y = date.getUTCFullYear();
         const m = String(date.getUTCMonth() + 1).padStart(2, '0');
         const d = String(date.getUTCDate()).padStart(2, '0');
+        const h = String(date.getUTCHours()).padStart(2, '0');
+        const min = String(date.getUTCMinutes()).padStart(2, '0');
+        
+        // Nếu có phần giờ phút chi tiết
+        if (serial % 1 !== 0) {
+          return `${y}-${m}-${d} ${h}:${min}`;
+        }
         return `${y}-${m}-${d}`;
       }
 
@@ -751,7 +759,7 @@
 
       const parsed = new Date(strVal);
       if (!isNaN(parsed.getTime())) {
-        return parsed.toISOString().split('T')[0];
+        return parsed.toISOString().replace('T', ' ').slice(0, 16);
       }
 
       return strVal;
