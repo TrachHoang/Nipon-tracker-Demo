@@ -963,7 +963,6 @@
             const department = extractField(l, ['khoaphongban', 'khoaphong', 'department'], vals[3] || '-');
             const sale = extractField(l, ['salephutrach', 'sale', 'nhanvien'], vals[4] || '');
             
-            // Lấy trực tiếp từ cột Ngày Thăm (Cột F) trong Excel
             let visitTime = formatExcelDate(extractField(l, ['ngaytham', 'visitTime', 'thoigiantham']));
             let startDate = formatExcelDate(extractField(l, ['ngaybatdaudemo', 'ngaybatdau', 'startdate']));
             let expectedDate = formatExcelDate(extractField(l, ['dukientra', 'expecteddate']));
@@ -1061,11 +1060,12 @@
       }
     }
 
-function logout() {
+    function logout() {
       if (confirm("Bạn có chắc chắn muốn đăng xuất khỏi hệ thống NIPON?")) {
         localStorage.removeItem('nipon_meddemo_user');
         currentUser = null;
-        // Bật lại màn hình đăng nhập
+        
+        // Hiện lại màn hình đăng nhập
         const loginScreen = document.getElementById('loginScreen');
         if (loginScreen) {
           loginScreen.classList.remove('hidden');
@@ -1638,7 +1638,7 @@ function logout() {
       return { html, totalPages };
     }
 
-    // 1. RENDER NHẬT KÝ (LOGS) DÙNG TRỰC TIẾP TRƯỜNG visitTime
+    // 1. RENDER NHẬT KÝ (LOGS) - SẮP XẾP MÃ PHIẾU TỪ MỚI ĐẾN CŨ
     function changePageLogs(p) {
       currentPageLogs = p;
       renderLogsTable();
@@ -1679,6 +1679,11 @@ function logout() {
         return (!filterSale || l.sale === filterSale) && (!filterStatus || l.status === filterStatus);
       });
 
+      // SẮP XẾP DANH SÁCH TỪ MỚI NHẤT ĐẾN CŨ NHẤT (THEO MÃ PHIẾU GIẢM DẦN)
+      filtered.sort((a, b) => {
+        return b.code.localeCompare(a.code, undefined, { numeric: true, sensitivity: 'base' });
+      });
+
       const totalItems = filtered.length;
       const totalPages = Math.ceil(totalItems / pageSizeLogs) || 1;
       if (currentPageLogs > totalPages) currentPageLogs = totalPages;
@@ -1696,7 +1701,6 @@ function logout() {
           const days = calculateLogDays(l) + ' ngày';
           const isDemo = l.status === 'Đang demo';
 
-          // Hiển thị trực tiếp trường visitTime độc lập
           const visitTimeDisplay = l.visitTime ? l.visitTime : '-';
 
           const tr = document.createElement('tr');
