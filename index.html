@@ -1061,13 +1061,23 @@
       }
     }
 
-    function logout() {
+function logout() {
       if (confirm("Bạn có chắc chắn muốn đăng xuất khỏi hệ thống NIPON?")) {
         localStorage.removeItem('nipon_meddemo_user');
         currentUser = null;
-        document.getElementById('loginScreen').classList.remove('hidden');
-        document.getElementById('formLogin').reset();
-        document.getElementById('loginError').classList.add('hidden');
+        // Bật lại màn hình đăng nhập
+        const loginScreen = document.getElementById('loginScreen');
+        if (loginScreen) {
+          loginScreen.classList.remove('hidden');
+        }
+        const formLogin = document.getElementById('formLogin');
+        if (formLogin) {
+          formLogin.reset();
+        }
+        const loginError = document.getElementById('loginError');
+        if (loginError) {
+          loginError.classList.add('hidden');
+        }
       }
     }
 
